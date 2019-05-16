@@ -26,47 +26,13 @@ pipeline {
 	        SCM_CREDENTIALS = "123456789"
 		SCM_BRANCH = "*/${BRANCH_NAME}"
 		}
+ stages {
 
-   stages {
-
-		stage('GET_CODE_MASTER') {
-            steps {
-                step([$class: 'WsCleanup'])
-                echo "[EXEC] - Obtener código fuente desde repositorio Git"
-                checkout([
-                        $class                           : 'GitSCM',
-                        branches                         : [
-                                [name: "*/master"]
-                        ],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions                       : [],
-                        submoduleCfg                     : [],
-                        userRemoteConfigs                : [
-                                [credentialsId: "${SCM_CREDENTIALS}", url: "${SCM_URL}"]
-                        ]
-                ])
-			}
+		stage('test') {
+                steps {
+                    step([$class: 'WsCleanup'])
+                    echo "[EXEC] - Obtener código fuente desde repositorio Git"
 		}
-
-
-		stage('GET_CODE_BRANCH') {
-            steps {
-                step([$class: 'WsCleanup'])
-                echo "[EXEC] - Obtener código fuente desde repositorio Git"
-                checkout([
-                        $class                           : 'GitSCM',
-                        branches                         : [
-                                [name: "*/clon-master2"]
-                        ],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions                       : [],
-                        submoduleCfg                     : [],
-                        userRemoteConfigs                : [
-                                [credentialsId: "${SCM_CREDENTIALS}", url: "${SCM_URL}"]
-                        ]
-                ])
-
-			}
 		}
 	}
 }

@@ -30,7 +30,6 @@ pipeline {
 
 		stage('test') {
                 steps {
-                    step([$class: 'WsCleanup'])
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 		}
 		}

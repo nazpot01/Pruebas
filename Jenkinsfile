@@ -33,7 +33,6 @@ pipeline {
                 steps {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 			echo cd /var/jenkins_home/workspace/unicoprueba
-			echo git checkout origin/clon-master2
 		}
 		}
 	}

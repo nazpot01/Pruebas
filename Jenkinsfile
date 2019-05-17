@@ -34,11 +34,12 @@ pipeline {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 			}
 		
-		stage('copiado')
+		stage('copiado'){
 			sh ''' 
 				bash -c "cd /var/jenkins_home/workspace/unicoprueba"
 			'''
 			echo pwd
+			}
 		
 		}
 	}

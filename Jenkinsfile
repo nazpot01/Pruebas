@@ -32,7 +32,7 @@ pipeline {
 		stage('test') {
                 steps {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
-			sh cd /var/jenkins_home/workspace/unicoprueba
+			sh bash cd /var/jenkins_home/workspace/unicoprueba
 			echo pwd
 		}
 		}

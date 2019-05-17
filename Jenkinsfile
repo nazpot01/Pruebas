@@ -39,6 +39,8 @@ pipeline {
 		steps {
 			sh"ls -lrt"
 			sh"pwd"
+			sh"git checkout origin/master"
+			sh"pwd"
 			}
 		
 		}

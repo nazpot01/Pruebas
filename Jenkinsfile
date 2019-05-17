@@ -8,6 +8,7 @@ def componentName
 def componentTag
 def componentAppName
 def binder
+def branch_name = "clon-master2"
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"					//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
@@ -24,13 +25,14 @@ pipeline {
 
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
-		SCM_BRANCH = "*/${BRANCH_NAME}"
+		SCM_BRANCH = "*/${branch_name}"
 		}
  stages {
 
 		stage('test') {
                 steps {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
+			echo "pwd"
 		}
 		}
 	}

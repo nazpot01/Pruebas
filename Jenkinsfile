@@ -32,7 +32,7 @@ pipeline {
 		stage('test') {
                 steps {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
-			echo "pwd"
+			echo pwd
 		}
 		}
 	}

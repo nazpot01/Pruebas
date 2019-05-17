@@ -37,9 +37,7 @@ pipeline {
 			}
 		stage('copiado'){
 		steps {
-			sh ''' 
-				"ls -l"
-			'''
+			sshCommand remote: remote, command: "ls -lrt"
 			echo pwd
 			}
 		

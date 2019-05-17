@@ -27,14 +27,16 @@ pipeline {
 	        SCM_CREDENTIALS = "123456789"
 		SCM_BRANCH = "*/${branch_name}"
 		}
- stages {
+		
+	stages {
 
 		stage('test') {
                 steps {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
+				}
 			}
-		
 		stage('copiado'){
+		steps {
 			sh ''' 
 				bash -c "cd /var/jenkins_home/workspace/unicoprueba"
 			'''

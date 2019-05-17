@@ -38,7 +38,7 @@ pipeline {
 		stage('copiado'){
 		steps {
 			sh ''' 
-				"cd /var/jenkins_home/workspace/unicoprueba && ls -l"
+				"ls -l"
 			'''
 			echo pwd
 			}

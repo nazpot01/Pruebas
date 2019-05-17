@@ -40,7 +40,7 @@ pipeline {
 			sh"ls -lrt"
 			sh"pwd"
 			sh"git checkout origin/master"
-			sh"pwd"
+			sh"git diff --name-only origin/*/${branch_name}| while read -r line; do cp "$line" /var/jenkins_home/workspace/Unicoarchivos ; done"
 			}
 		
 		}

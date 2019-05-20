@@ -39,9 +39,7 @@ pipeline {
 		steps {
 			sh"pwd"
 			sh"git checkout origin/clon-master2"
-			sh ''' 
-				bash -c "git diff --name-only origin/master"
-			'''
+			sh"git diff --name-only origin/master | echo $1"
 			}
 		
 		}

@@ -37,7 +37,6 @@ pipeline {
 			}
 		stage('copiado'){
 		steps {
-			sh"ls -lrt"
 			sh"pwd"
 			sh"git checkout origin/clon-master2"
 			sh ''' 

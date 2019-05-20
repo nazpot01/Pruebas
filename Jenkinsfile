@@ -40,7 +40,7 @@ pipeline {
 			sh"pwd"
 			sh"git checkout origin/clon-master2"
 			sh ''' 
-				bash -c "git diff --name-only origin/master | while read -r line; do echo $line ; done"
+				bash -c "git diff --name-only origin/master"
 			'''
 			}
 		

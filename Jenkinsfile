@@ -40,7 +40,6 @@ pipeline {
 			sh"ls -lrt"
 			sh"pwd"
 			sh"git checkout origin/clon-master2"
-			sh"git diff --name-only origin/master | while read -r line; do cp "$line" /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
 		
 		}

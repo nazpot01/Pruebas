@@ -38,5 +38,41 @@ pipeline {
 			}
 		
 		}
+		stage('Publisher'){
+		steps {
+			import java.io.File;
+
+				public class ListFilesTxt {
+
+					public static void main(String[] args) 
+					{
+						String path = "/var/jenkins_home/workspace/Prueba_deploy"; 
+
+						String files;
+						File folder = new File(path);
+						File[] listOfFiles = folder.listFiles(); 
+
+						for (int i = 0; i < listOfFiles.length; i++) 
+						{
+
+							if (listOfFiles[i].isFile()) 
+							{
+								files = listOfFiles[i].getName();
+								if (files.endsWith(".txt") || files.endsWith(".TXT"))
+								{
+									System.out.println(files);
+								}
+								 if (files.endsWith("unico.ear") || files.endsWith(".EAR"))
+								{
+									System.out.println(files);
+								}
+							}
+						}
+						System.out.println("Fin");
+					}
+				}
+			}
+		
+		}
 	}
 }

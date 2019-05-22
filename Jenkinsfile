@@ -8,9 +8,6 @@ def componentName
 def componentTag
 def componentAppName
 def binder
-import java.nio.file.*
-def destination = "/var/jenkins_home/workspace/Prueba_deploy"
-def path = "/var/jenkins_home/workspace/unicoarchivos"
 def branch_name = "clon-master2"
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.

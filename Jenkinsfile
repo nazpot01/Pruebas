@@ -43,15 +43,11 @@ pipeline {
 		}
 		stage('Publisher'){
 		steps {
-				class FilesHelp {
-					def main() {
-						def folder = new File("/var/jenkins_home/workspace/unicoarchivos")
-						        Arrays.asList(folder.listFiles()).stream()
-							    .map(File::getAbsolutePath)
-							    .filter(f -> f.toLowerCase().endsWith(".ear"))
-							    .forEach(f -> processFile(new File(f))) 
-					}
-					
+			class FilesHelp {
+			    def main() {
+				def folder = new File("C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2")
+				Arrays.asList(folder.listFiles()).stream().map(File::getAbsolutePath).filter(f -> f.toLowerCase().endsWith(".ear")).forEach(f -> processFile(new File(f))) 
+			    }
 					def processFile(def file) {
 						Path copyDir = Paths.get("/var/jenkins_home/workspace/Prueba_deploy")
 						Path originalPath = file.toPath()

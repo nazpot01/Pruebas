@@ -40,7 +40,6 @@ pipeline {
 		}
 		stage('Publisher'){
 		steps {
-			import java.io.File;
 
 				public class ListFilesTxt {
 

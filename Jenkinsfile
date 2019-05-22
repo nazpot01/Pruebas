@@ -42,7 +42,7 @@ pipeline {
 		
 		}
 		stage('Publisher'){
-		steps {
+		/*steps {
 			class FilesHelp {
 			    def main() {
 				def folder = new File("C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2")
@@ -65,7 +65,7 @@ pipeline {
 					}
 				}
 				new FilesHelp().main()
-			}
+			*/}
 		}
 		
 	}

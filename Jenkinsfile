@@ -46,7 +46,10 @@ pipeline {
 				class FilesHelp {
 					def main() {
 						def folder = new File("/var/jenkins_home/workspace/unicoarchivos")
-						Arrays.asList(folder.listFiles()).stream().map(File::getAbsolutePath).filter(f -> f.toLowerCase().endsWith(".ear")).forEach(f -> processFile(new File(f))) 
+						        Arrays.asList(folder.listFiles()).stream()
+							    .map(File::getAbsolutePath)
+							    .filter(f -> f.toLowerCase().endsWith(".ear"))
+							    .forEach(f -> processFile(new File(f))) 
 					}
 					
 					def processFile(def file) {

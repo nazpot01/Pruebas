@@ -9,8 +9,8 @@ def componentTag
 def componentAppName
 def binder
 import java.nio.file.*
-def destination = "C:/Users/hhernanc/prueba/"
-def path = "C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2"
+def destination = "/var/jenkins_home/workspace/Prueba_deploy"
+def path = "/var/jenkins_home/workspace/unicoarchivos"
 def branch_name = "clon-master2"
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
@@ -45,7 +45,7 @@ pipeline {
 		steps {
 				class FilesHelp {
 					def main() {
-						def folder = new File("C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2")
+						def folder = new File("/var/jenkins_home/workspace/unicoarchivos")
 						Arrays.asList(folder.listFiles()).stream()
 							.map(File::getAbsolutePath)
 							.filter(f -> f.toLowerCase().endsWith(".ear"))
@@ -53,7 +53,7 @@ pipeline {
 					}
 					
 					def processFile(def file) {
-						Path copyDir = Paths.get("C:/Users/hhernanc/prueba/")
+						Path copyDir = Paths.get("/var/jenkins_home/workspace/Prueba_deploy")
 						Path originalPath = file.toPath()
 						Path copyFile = copyDir.resolve(file.getName())
 						if(!Files.exists(copyFile)) {

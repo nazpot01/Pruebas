@@ -40,33 +40,7 @@ pipeline {
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
 		
-		}/*
-		stage('Publisher'){
-		steps {
-			class FilesHelp {
-			    def main() {
-				def folder = new File("C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2")
-				Arrays.asList(folder.listFiles()).stream()
-				    .map(f -> f.getAbsolutePath())
-				    .filter(f -> f.toLowerCase().endsWith(".ear"))
-				    .forEach(f -> processFile(new File(f))) 
-			    }
-					def processFile(def file) {
-						Path copyDir = Paths.get("/var/jenkins_home/workspace/Prueba_deploy")
-						Path originalPath = file.toPath()
-						Path copyFile = copyDir.resolve(file.getName())
-						if(!Files.exists(copyFile)) {
-							Files.createFile(copyFile)
-						}
-						Files.copy(originalPath, copyFile, StandardCopyOption.REPLACE_EXISTING)
-						
-						System.out.println(originalPath)
-						System.out.println(copyFile)
-					}
-				}
-				new FilesHelp().main()
-			}
-		}*/
+		}
 		
 	}
 }

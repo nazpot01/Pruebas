@@ -40,8 +40,8 @@ pipeline {
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
 		
-		}
-		stage('Publisher')/*{
+		}/*
+		stage('Publisher'){
 		steps {
 			class FilesHelp {
 			    def main() {
@@ -66,7 +66,7 @@ pipeline {
 				}
 				new FilesHelp().main()
 			}
-		}*/
+		}
 		
-	}
+	}*/
 }

@@ -8,6 +8,9 @@ def componentName
 def componentTag
 def componentAppName
 def binder
+import java.nio.file.*
+def destination = "C:/Users/hhernanc/prueba/"
+def path = "C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2"
 def branch_name = "clon-master2"
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.

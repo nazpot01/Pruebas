@@ -40,36 +40,31 @@ pipeline {
 		}
 		stage('Publisher'){
 		steps {
-			class ListFilesTxt {
-				public static void main(String[] args) 
-					{
-						String path = "/var/jenkins_home/workspace/Prueba_deploy"; 
-
-						String files;
-						File folder = new File(path);
-						File[] listOfFiles = folder.listFiles(); 
-
-						for (int i = 0; i < listOfFiles.length; i++) 
-						{
-
-							if (listOfFiles[i].isFile()) 
-							{
-								files = listOfFiles[i].getName();
-								if (files.endsWith(".txt") || files.endsWith(".TXT"))
-								{
-									System.out.println(files);
-								}
-								 if (files.endsWith("unico.ear") || files.endsWith(".EAR"))
-								{
-									System.out.println(files);
-								}
-							}
+				class FilesHelp {
+					def main() {
+						def folder = new File("C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2")
+						Arrays.asList(folder.listFiles()).stream()
+							.map(File::getAbsolutePath)
+							.filter(f -> f.toLowerCase().endsWith(".ear"))
+							.forEach(f -> processFile(new File(f))) 
+					}
+					
+					def processFile(def file) {
+						Path copyDir = Paths.get("C:/Users/hhernanc/prueba/")
+						Path originalPath = file.toPath()
+						Path copyFile = copyDir.resolve(file.getName())
+						if(!Files.exists(copyFile)) {
+							Files.createFile(copyFile)
 						}
-						System.out.println("Fin");
+						Files.copy(originalPath, copyFile, StandardCopyOption.REPLACE_EXISTING)
+						
+						System.out.println(originalPath)
+						System.out.println(copyFile)
 					}
 				}
+				new FilesHelp().main()
 			}
-		
 		}
+		
 	}
 }

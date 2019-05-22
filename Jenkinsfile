@@ -40,10 +40,8 @@ pipeline {
 		}
 		stage('Publisher'){
 		steps {
-
-				class ListFilesTxt {
-
-					public static void main(String[] args) 
+			class ListFilesTxt {
+				public static void main(String[] args) 
 					{
 						String path = "/var/jenkins_home/workspace/Prueba_deploy"; 
 

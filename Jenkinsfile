@@ -65,8 +65,8 @@ pipeline {
 					}
 				}
 				new FilesHelp().main()
-			*/}
-		}
+			}
+		*/}
 		
 	}
 }

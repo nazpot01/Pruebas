@@ -41,7 +41,7 @@ pipeline {
 		stage('Publisher'){
 		steps {
 
-				public class ListFilesTxt {
+				class ListFilesTxt {
 
 					public static void main(String[] args) 
 					{

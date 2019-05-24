@@ -40,14 +40,16 @@ pipeline {
 		}
 		stage('Publisher'){
 		steps {
-			      def srcStream = new File('/var/jenkins_home/workspace/unicoarchivos/Unico1.ear').newDataInputStream()
-			      def dstStream = new File('/var/jenkins_home/workspace/Prueba_deploy/Unico1.ear').newDataOutputStream()
-			      dstStream << srcStream
-			      srcStream.close()
-			      dstStream.close()
-
-			}
+			    {
+					  def srcStream = new File('/home/jon/xxx.zip').newDataInputStream()
+					  def dstStream = new File('/home/jon/xxx2.zip').newDataOutputStream()
+					  dstStream << srcStream
+					  srcStream.close()
+					  dstStream.close()
+				   
+				}
 			}
 		}
+		
 	}
 }

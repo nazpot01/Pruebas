@@ -39,14 +39,13 @@ pipeline {
 		
 		}
 		stage('Publisher'){
-		steps {class FileExample {
-			   static void main(String[] args) {
+		steps {
 			      def srcStream = new File('/var/jenkins_home/workspace/unicoarchivos/Unico1.ear').newDataInputStream()
 			      def dstStream = new File('/var/jenkins_home/workspace/Prueba_deploy/Unico1.ear').newDataOutputStream()
 			      dstStream << srcStream
 			      srcStream.close()
 			      dstStream.close()
-			   }
+
 			}
 			}
 		}

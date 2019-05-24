@@ -41,8 +41,8 @@ pipeline {
 		stage('Publisher'){
 		steps {
 			script {
-			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/unico.ear"
-			 String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/unico.ear"
+			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/unico1.ear"
+			 String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/unico1.ear"
 			 (new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 			}
 		    }

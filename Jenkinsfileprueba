@@ -41,15 +41,11 @@ pipeline {
 		stage('Publisher'){
 		steps {
 			script {
-				class FileExample {
-				   static void main(String[] args) {
 					  def srcStream = new File('/var/jenkins_home/workspace/unicoarchivos/unico1.ear').newDataInputStream()
 					  def dstStream = new File('/var/jenkins_home/workspace/Prueba_deploy/unico1.ear').newDataOutputStream()
 					  dstStream << srcStream
 					  srcStream.close()
 					  dstStream.close()
-				   }
-				}
 			}
 		    }
 		}

@@ -38,7 +38,7 @@ pipeline {
 			}
 		
 		}
-		stage('Publisher'){
+		stage('publisher'){
 		steps {
 			script {
 			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/unico1.ear"

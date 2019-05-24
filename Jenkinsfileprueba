@@ -41,13 +41,12 @@ pipeline {
 		stage('Publisher'){
 		steps {
 			    L:{
-					  def srcStream = new File('/home/jon/xxx.zip').newDataInputStream()
-					  def dstStream = new File('/home/jon/xxx2.zip').newDataOutputStream()
-					  dstStream << srcStream
-					  srcStream.close()
-					  dstStream.close()
-				   
-				}
+				    def srcStream = new File('/home/jon/xxx.zip').newDataInputStream()
+			       def dstStream = new File('/home/jon/xxx2.zip').newDataOutputStream()
+			       dstStream << srcStream
+			       srcStream.close()
+			       dstStream.close()
+			    }
 			}
 		}
 		

@@ -41,11 +41,9 @@ pipeline {
 		stage('Publisher'){
 		steps {
 			script {
-					  def srcStream = new File('/var/jenkins_home/workspace/unicoarchivos/unico1.ear').newDataInputStream()
-					  def dstStream = new File('/var/jenkins_home/workspace/Prueba_deploy/unico1.ear').newDataOutputStream()
-					  dstStream << srcStream
-					  srcStream.close()
-					  dstStream.close()
+				String sourceFilePath = "C:/Users/hhernanc/Desktop/HOLMAN/LABORATORIOS/DOCKER/DOCKER2/unico.ear"
+				 String destinationFilePath = "C:/Users/hhernanc/prueba/unico.ear"
+				 (new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 			}
 		    }
 		}

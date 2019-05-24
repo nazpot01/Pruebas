@@ -40,15 +40,9 @@ pipeline {
 		}
 		stage('Publisher'){
 		steps {
-			    {
-				    static void main(String[] args) {
-				    def srcStream = new File('/home/jon/xxx.zip').newDataInputStream()
-			       def dstStream = new File('/home/jon/xxx2.zip').newDataOutputStream()
-			       dstStream << srcStream
-			       srcStream.close()
-			       dstStream.close()
-			    }
-			}
+			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/unico.ear"
+			 String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/unico.ear"
+			 (new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 		}
 	    }	
 	}

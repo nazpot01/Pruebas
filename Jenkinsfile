@@ -36,7 +36,7 @@ pipeline {
 			sh"git checkout origin/${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
-		
+
 		}
 		stage('publisher'){
 		steps {

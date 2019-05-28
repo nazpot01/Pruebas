@@ -20,7 +20,7 @@ pipeline {
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
 		SCM_BRANCH = "*/${BRANCH_NAME}"
-		BRANCH_NAME= "clon-master2"
+		BRANCH_NAME= "clon-master1"
 		}
 		
 	stages {

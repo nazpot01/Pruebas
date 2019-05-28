@@ -19,7 +19,7 @@ pipeline {
 
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
-		SCM_BRANCH = "*/${BRANCH_NAME}"
+		SCM_BRANCH = "${BRANCH_NAME}"
 		BRANCH_NAME= "clon-master1"
 		}
 		
@@ -33,7 +33,7 @@ pipeline {
 		stage('copiado'){
 		steps {
 			sh"pwd"
-			sh"git checkout */${BRANCH_NAME}"
+			sh"git checkout origin/${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
 		

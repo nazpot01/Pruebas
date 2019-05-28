@@ -12,7 +12,6 @@ def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"					//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
 
-
 pipeline {
 	agent any
 	   	environment {

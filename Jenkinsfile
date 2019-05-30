@@ -21,7 +21,7 @@ pipeline {
 	        SCM_CREDENTIALS = "123456789"
 		SCM_BRANCH = "${BRANCH_NAME}"
 		BRANCH_NAME= "clon-master1" //variable
-		}
+		} 
 		
 	stages {
 

@@ -15,7 +15,7 @@ def tipo = "EAR1"					//Modificar segun el tipo de artefacto en mayusculas, las 
 pipeline {
 	agent any
 	   	environment {
-
+			
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
 		SCM_BRANCH = "${BRANCH_NAME}"

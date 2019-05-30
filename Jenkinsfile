@@ -42,10 +42,10 @@ pipeline {
 		stage('publisher'){
 		steps {
 			script {
-			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/*"
-			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/*"
+			/*String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/"
+			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/"
 			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
-			sh"cd /var/jenkins_home/workspace/unicoarchivos"
+			sh"cd /var/jenkins_home/workspace/unicoarchivos" */
 		        lista=sh("ls -l");
 			println lista	
 			}

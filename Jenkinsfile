@@ -44,9 +44,10 @@ pipeline {
 			script {
 			/*String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/"
 			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/"
-			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
-			sh"cd /var/jenkins_home/workspace/unicoarchivos" */
-		        lista=sh("ls -l");
+			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)*/
+			sh"cd /var/jenkins_home/workspace/unicoarchivos" 
+			sh"pwd"
+		        lista=sh(script: "ls -l", returnStdout : true );
 			println lista	
 			}
 		    }

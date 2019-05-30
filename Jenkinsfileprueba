@@ -26,7 +26,7 @@ pipeline {
 	stages {
 
 		stage('test') {
-                steps {
+                steps { 
                     script{
 					sh"pwd"
 					checkout([$class: 'GitSCM', branches: [[name: SCM_BRANCH]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: item]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub token ugithub", url: "https://github.com/nazpot01/Pruebas.git"]]])

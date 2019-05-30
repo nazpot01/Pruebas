@@ -31,7 +31,7 @@ pipeline {
                     script{
 					sh"pwd"
 					step([$class: 'WsCleanup'])
-					checkout([$class: 'GitSCM', branches: [[name: BRANCH_NAME]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub token ugithub", url: 'https://github.com/nazpot01/Pruebas.git']]])
+					checkout([$class: 'GitSCM', branches: [[name: BRANCH_NAME]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: SCM_CREDENTIALS, url: 'https://github.com/nazpot01/Pruebas.git']]])
 					sh('git log --format=%B -1 > '+Workspace+'/GIT_MESSAGE')
 					Mensaje = readFile(Workspace+'/GIT_MESSAGE').trim()
 					println Mensaje
@@ -54,7 +54,7 @@ pipeline {
 									TAG = list[0]
 									println TAG
 									echo'-------------------------------CHECKOUT TAG '+TAG+'-----------------------------------'
-									checkout([$class: 'GitSCM', branches: [[name: 'refs/tags/'+TAG]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub token ugithub", url: 'https://github.com/nazpot01/Pruebas']]])
+									checkout([$class: 'GitSCM', branches: [[name: 'refs/tags/'+TAG]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: SCM_CREDENTIALS, url: 'https://github.com/nazpot01/Pruebas']]])
 							}
 						}
 				}

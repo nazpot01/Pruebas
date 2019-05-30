@@ -21,7 +21,7 @@ pipeline {
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
 		SCM_BRANCH = "*/${BRANCH_NAME}"
-		BRANCH_NAME= "clon-master2"
+		BRANCH_NAME= "master"
 		}
 		
 	stages {
@@ -31,7 +31,7 @@ pipeline {
                     script{
 					sh"pwd"
 					step([$class: 'WsCleanup'])
-					checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub token ugithub", url: 'https://github.com/nazpot01/Pruebas.git']]])
+					checkout([$class: 'GitSCM', branches: [[name: BRANCH_NAME]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub token ugithub", url: 'https://github.com/nazpot01/Pruebas.git']]])
 					sh('git log --format=%B -1 > '+Workspace+'/GIT_MESSAGE')
 					Mensaje = readFile(Workspace+'/GIT_MESSAGE').trim()
 					println Mensaje
@@ -62,19 +62,12 @@ pipeline {
 		stage('copiado'){
 		steps {
 			sh"pwd"
-			sh"git checkout */${BRANCH_NAME}"
+			sh"git checkout origin/${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
 		
 		}
 		stage('publisher'){
-		steps {
-			script {
-			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/unico1.ear"
-			 String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/unico1.ear"
-			 (new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
-			}
-		    }
 		}
 	}
 }

@@ -8,7 +8,6 @@ def componentName
 def componentTag
 def componentAppName
 def binder
-def branch_name = "clon-master2"
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"					//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
@@ -20,20 +19,208 @@ pipeline {
 
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
-		SCM_BRANCH = "*/${branch_name}"
+		SCM_BRANCH = "*/${BRANCH_NAME}"
+		BRANCH_NAME= "clon-master2"
 		}
 		
 	stages {
 
 		stage('test') {
                 steps {
-                    echo "[EXEC] - Obtener código fuente desde repositorio Git"
+                    script{
+					sh"pwd"
+					checkout([$class: 'GitSCM', branches: [[name: SCM_BRANCH]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: item]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub token ugithub", url: "https://github.com/nazpot01/Pruebas.git"]]])
+					dir("jenkinsfile-portal") {
+						sh"git checkout origin/${BRANCH_NAME}"
+						sh"git pull"
+						sh('git log --format=%B -1 > '+Workspace+'/GIT_MESSAGE')
+						Mensaje = readFile(Workspace+'/GIT_MESSAGE').trim()
+						println Mensaje
+					
+						Mensaje = Mensaje.split('\n')
+						a = Mensaje.length
+						println a
+						if(a>1){						
+							n = Mensaje[2].indexOf(':')
+								println n+" este es el index"
+								if(n>=0){
+									UCD_DEPLOY = 1
+								}
+								else UCD_DEPLOY = 0
+						}
+						
+						if (UCD_DEPLOY == 1){
+							println Mensaje[2] +" este es el mensaje"							
+							list = Mensaje[2].split(':')						
+							USSER = list[0]
+							EMAIL = USSER+"@ath.com.co"
+							println EMAIL
+							UCD_COMPONENTS=list								
+						}
+					}
+					
+					for(int i = 1; i < UCD_COMPONENTS.length; i++){
+						Dato = UCD_COMPONENTS[i].split(',')
+						println Dato[0]
+						println Dato[1]
+						println Dato
+								
+						switch(Dato[0]){
+							case 'PagoExtractoDigital': 
+							ID="com.ibm.pagoextractodigital.PagoExtractoDigitalPortlet.46eca16a86.webmod";break;
+							case 'LoginUtil': 
+							ID="";break;
+							case 'CargueArchivoFacPersonalizado': 
+							ID="com.portalrecaudadores.carguearchivofacpersonalizado.portlet.CargueArchivoFacPersonalizadoPortlet.99524eb675.webmod";break;
+							case 'ActivacionCuenta': 
+							ID="com.portalpagos.activacioncuenta.portlet.ActivacionCuentaPortlet.3a8b976eb4.webmod";break;
+							case 'AsociacionPagosEmail': 
+							ID="com.portalpagos.asociacionpagosemail.portlet.AsociacionPagosEmailPortlet.ba18aee315.webmod";break;
+							case 'BuscadorInscribirServ': 
+							ID="com.portalpagos.buscadorinscribir.portlet.BuscadorInscribirPortlet.188bdcc605.webmod";break;
+							case 'BuscadorPrincipal': 
+							ID="com.portalpagos.buscadorprincipal.facesportlet.BuscadorPrincipalFacesPortlet.114a65d594.webmod";break;
+							case 'CargarConfiguracionVentanilla': 
+							ID="com.portalpagos.cargarconfiguracionventanilla.portlet.CargarConfiguracionVentanillaPortlet.a3219e0175.webmod";break;
+							case 'Comprobante-Pago': 
+							ID="com.portalpagos.comprobantepago.portlet.ComprobantePagoPortlet.9d0d974a94.webmod";break;
+							case 'ConveniosFrecuentes': 
+							ID="com.portalpagos.conveniosfrecuentes.portlet.ConveniosFrecuentesPortlet.4faa7c1535.webmod";break;
+							case 'Dashboard': 
+							ID="";break;
+							case 'EditarPerfil': 
+							ID="com.portalpagos.editarperfil.portlet.EditarPerfilPortlet.d58c02d6d4.webmod";break;
+							case 'FiltroHistoricoPagos': 
+							ID="com.portalpagos.filtrohistoricopagos.portlet.FiltroHistoricoPagosPortlet.f907f01eb4.webmod";break;
+							case 'FiltroVerificaPago': 
+							ID="com.portalpagos.filtroverificapago.portlet.FiltroVerificaPagoPortlet.0611d036a4.webmod";break;
+							case 'InscripcionServicios': 
+							ID="com.portalpagos.inscripcionservicios.portlet.InscripcionServiciosPortlet.8aa4d600c4.webmod";break;
+							case 'MisFinanzas': 
+							ID="com.portalpagos.misfinanzas.MisFinanzasPortlet.4c8782f2d4.webmod";break;
+							case 'ConsultaServiciosAlertas': 
+							ID="com.portalpagos.consultaserviciosalertas.portlet.ConsultaServiciosAlertasPortlet.c4f9b6cdc4.webmod";break;
+							case 'PagosRecientes': 
+							ID="com.portalpagos.pagosrecientes.portlet.PagosRecientesPortlet.a913641355.webmod";break;
+							case 'QuePuedoPagarCateg': 
+							ID="com.portalpagos.quepagar.portlet.QuePuedoPagarCategPortlet.8d361a3ea4.webmod";break;
+							case 'QuePuedoPagarConv': 
+							ID="com.portalpagos.quepuedopagarconv.portlet.QuePuedoPagarConvPortlet.463cf00da4.webmod";break;
+							case 'RealizarPagoImpFact': 
+							ID="com.portalpagos.realizarpagoimp.portlet.RealizarPagoImpFactPortlet.76ecb2a6e4.webmod";break;
+							case 'RegistroPagoClientes': 
+							ID="com.portalpagos.registropagoclientes.portlet.RegistroPagoClientesPortlet.a00d34a275.webmod";break;
+							case 'RegistroPortalClientes': 
+							ID="com.portalpagos.registroportalclientes.portlet.RegistroPortalClientesPortlet.678b11b4b4.webmod";break;
+							case 'ResultadoHistoricoPagos': 
+							ID="com.portalpagos.resultadohistoricopagos.portlet.ResultadoHistoricoPagosPortlet.92f2425eb4.webmod";break;
+							case 'ResultadoVerificarPago': 
+							ID="com.portalpagos.resultadoverificarpago.ResultadoVerificarPagoPortlet.aa19140da4.webmod";break;
+							case 'ResultBusqueda': 
+							ID="";break;
+							case 'CargueArchivosFact': 
+							ID="com.portalrecaudadores.carguearchivos.portlet.CargueArchivosFactPortlet.b57231bbd4.webmod";break;
+							case 'CargueFacturacionPlantilla': 
+							ID="com.portalrecaudadores.carguefacturacionplantilla.portlet.CargueFacturacionPlantillaPortlet.0535bd8675.webmod";break;
+							case 'ConsultaCargaArchivo': 
+							ID="com.portalrecaudadores.consultacargaarchivo.portlet.ConsultaCargaArchivoPortlet.0f2454fbd4.webmod";break;
+							case 'ConsultaTransacciones': 
+							ID="com.portalrecaudadores.consultatransacciones.portlet.ConsultaTransaccionesPortlet.038a17c6d4.webmod";break;
+							case 'DashboardTransacciones': 
+							ID="com.portalpagos.dashboard.DashboardTransaccionesPortlet.321b6c95d4.webmod";break;
+							case 'DefinicionTopes': 
+							ID="com.portalrecaudadores.definiciontopes.DefinicionTopesPortlet.bccc9718a5.webmod";break;
+							case 'eDITARUsuarioRec': 
+							ID="com.portalrecaudadores.editarusuario.portlet.EditarUsuarioPortlet.f7371372f4.webmod";break;
+							case 'FiltroTopesTransacciones': 
+							ID="com.portalrecaudadores.filtrotopestransacciones.portlet.FiltroTopesTransaccionesPortlet.b4f66859a5.webmod";break;
+							case 'GestionarPagoVentanilla': 
+							ID="com.portalrecaudadores.gestionarpagoventanilla.portlet.GestionarPagoVentanillaPortlet.039b973375.webmod";break;
+							case 'GestionarPlantillaPersonalizada': 
+							ID="com.portalrecaudadores.gestionarplantillapersonalizada.portlet.GestionarPlantillaPersonalizadaPortlet.1d810c2775.webmod";break;
+							case 'LoginCabecaraRec': 
+							ID="";break;
+							case 'OlvidoContrasena': 
+							ID="com.portalpagos.olvidocontra.portlet.OlvidoContrasenaPortlet.dcd662b4b4.webmod";break;
+							case 'OlvidoContrasenaRec': 
+							ID="com.portalpagos.olvidocontrasenarecaudadores.portlet.OlvidoContrasenaRecaudadoresPortlet.dcd662b4b4.webmod";break;
+							case 'PreguntasSeguridadClientes': 
+							ID="com.portalpagos.preguntasseguridadclientes.portlet.PreguntasSeguridadClientesPortlet.63dfcf0805.webmod";break;
+							case 'PreguntasSeguridadRecaudadores': 
+							ID="com.portalrecaudadores.preguntasseguridadrecaudadores.portlet.PreguntasSeguridadRecaudadoresPortlet.904a54fc05.webmod";break;
+							case 'RenovarContrasena': 
+							ID="com.portalpagos.renovarcontrasena.portlet.RenovarContrasenaPortlet.a6741f25c4.webmod";break;
+							case 'RenovarContrasenaRec': 
+							ID="com.portalpagos.cambiarcontrasenarecaudadores.portlet.CambiarContrasenaRecaudadoresPortlet.a6741f25c4.webmod";break;
+							case 'ReportePagos': 
+							ID="com.portalrecaudadores.reportepagos.portlet.ReportePagosPortlet.54e33f70e4.webmod";break;
+							case 'ResultadoConsultaCarga': 
+							ID="com.portalrecaudadores.resultadoconsultacarga.portlet.ResultadoConsultaCargaPortlet.828dc78dd4.webmod";break;
+							case 'ResultadoConsultaTrans': 
+							ID="com.portalrecaudadores.resultadoconsultatrans.portlet.ResultadoConsultaTransPortlet.c96c2717d4.webmod";break;
+							case 'VinculaTuEmpresa': 
+							ID="com.portalrecaudadores.vinculatuempresa.portlet.VinculaTuEmpresaPortlet.092ac94bd4.webmod";break;
+							case 'Consultar-Usuario': 
+							ID="com.portalpagos.consultarusuarios.ConsultarUsuariosPortlet.73e7ea0ce4.webmod";break;
+							case 'LoginCabecera': 
+							ID="com.portalpagos.login.portlet.LoginPortlet.dc53f505b4.webmod";break;
+							case 'LoginPagoAgil': 
+							ID="com.portalpagos.loginpagoagil.portlet.LoginPagoAgilPortlet.bf6ea84555.webmod";break;
+							case 'RealizarPagoFactV2': 
+							ID="com.portalpagos.realizarpagofactv2.portlet.RealizarPagoFactV2Portlet.0d4211f275.webmod";break;
+							case 'realizarPagoObligacionesOccidenteV2': 
+							ID="com.portalpagos.realizarpagoobligacionesoccidentev2.portlet.RealizarPagoObligacionesOccidenteV2Portlet.20193d4375.webmod";break;
+							case 'RealizarPagoV2': 
+							ID="com.portalpagos.realizarpagov2.portlet.RealizarPagoPortlet.8f33e1a275.webmod";break;
+							case 'PagoObligacionesFinancieras': 
+							ID="com.portalpagos.obligacionesfinacieras.portlet.PagoObligFinancierasPortlet.552e8242c4.webmod";break;
+							case 'CrearUsuarioRec': 
+							ID="com.portalrecaudadores.crearusuariorec.portlet.CrearUsuarioRecPortlet.6f04c8d4f4.webmod";break;
+							case 'RealizarPagosExtractoDigital': 
+							ID="com.ibm.realizarpagosextractodigital.RealizarPagosExtractoDigitalPortlet.6d5284e286.webmod";break;
+							case 'LoginCabeceraRec': 
+							ID="";break;
+							case 'EnviarFacPlantilla':
+							ID="com.portalrecaudadores.enviarfacplantilla.portlet.EnviarFacPlantillaPortlet.8dd88cc4f4.webmod";break;
+							
+						}
+					
+						
+						dir(Dato[0]){
+							sh"git checkout develop"
+							sh"git pull"
+							buildAppMVN()							
+						}
+						
+						step([$class   : 'UCDeployPublisher',
+							siteName : 'devops-ucd.ath.net',
+							component: [
+								$class         : 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+								componentName  : "PORTALPAGOS-"+Dato[0],
+								createComponent: [
+								$class              : 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								componentTemplate   : 'WAR-PORTAL',
+								componentApplication: 'AVAL PAY CENTER'
+								],
+								delivery       : [
+										$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
+										pushVersion        : Dato[1],
+										pushProperties     : "war-file-name="+Dato[0]+"\nportletname=POPAG_"+Dato[0]+"\nID="+ID,
+										baseDir            : "/var/lib/jenkins/workspace/AVAL-PAY-CENTER/PipelineWAR/target/",
+										fileIncludePatterns: "*.war \n",
+										fileExcludePatterns: '',
+										pushDescription    : 'Ear contruido por pipeline Jenkins'
+								]
+							]
+						])
+					}
+				}
 				}
 			}
 		stage('copiado'){
 		steps {
 			sh"pwd"
-			sh"git checkout origin/clon-master2"
+			sh"git checkout */${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			}
 		

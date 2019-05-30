@@ -8,6 +8,7 @@ def componentName
 def componentTag
 def componentAppName
 def binder
+def lista
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"					//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
@@ -42,8 +43,11 @@ pipeline {
 		steps {
 			script {
 			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/unico1.ear"
-			 String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/unico1.ear"
-			 (new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
+			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/unico1.ear"
+			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
+			sh"cd /var/jenkins_home/workspace/unicoarchivos"
+		        lista=sh("ls -l");
+			println lista	
 			}
 		    }
 		}

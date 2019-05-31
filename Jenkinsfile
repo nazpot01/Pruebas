@@ -44,6 +44,9 @@ pipeline {
 		steps {
 			script {
 			sh"cp -r /var/jenkins_home/workspace/unicoarchivos/ /var/jenkins_home/workspace/Prueba_deploy/"
+			sh"pwd"
+		        lista=sh(script: "ls", returnStdout : true );
+			println lista	
 			//String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos"
 			//String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy"
 			//(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)

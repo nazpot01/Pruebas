@@ -43,7 +43,7 @@ pipeline {
 			}
 		}
 		stage('publisher'){
-		steps {
+		//steps {
 			//script {
 			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos/ /var/jenkins_home/workspace/Prueba_deploy/"
 			//sh"pwd"
@@ -53,7 +53,7 @@ pipeline {
 			//String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy"
 			//(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 			//}
-		    }
+		    //}
 		}
 	}
 }

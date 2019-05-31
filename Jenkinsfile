@@ -42,7 +42,7 @@ pipeline {
 			sh"cd EAR/"
 			sh"pwd"
 			sh"ls"	
-			lista=sh(script: "ls", returnStdout : true );
+			lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos && ls", returnStdout : true );
 			println lista + 'uuuuuuuuuuuu'
 			//lista = lista.split('/n')
 			//		a = lista.length

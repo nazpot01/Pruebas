@@ -46,7 +46,7 @@ pipeline {
 			script {
 			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/"
 			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/"
-			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)*/
+			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 			}
 		    }
 		}

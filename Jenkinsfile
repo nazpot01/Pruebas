@@ -39,13 +39,12 @@ pipeline {
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 				}
 			}
-
 		}
 		stage('publisher'){
 		steps {
 			script {
-			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/"
-			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/"
+			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos"
+			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy"
 			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 			}
 		    }

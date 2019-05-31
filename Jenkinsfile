@@ -38,7 +38,8 @@ pipeline {
 			sh"git checkout origin/${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy/"
-			lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos && ls", returnStdout : true );
+			sh"cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos"
+			lista=sh(script: "ls", returnStdout : true );
 			println lista + 'uuuuuuuuuuuu'
 			lista = lista.split('/n')
 					a = lista.length

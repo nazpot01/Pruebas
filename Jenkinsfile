@@ -44,11 +44,8 @@ pipeline {
 		}
 		stage('publisher'){
 		steps {
-			sh ''' 
-				bash -c "cd /var/jenkins_home/workspace/unicoprueba"
-			'''
+				sh 'cd /var/jenkins_home/workspace/unicoprueba'
 			echo pwd
-			}
 			//script {
 			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos/ /var/jenkins_home/workspace/Prueba_deploy/"
 			//sh"pwd"

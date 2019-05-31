@@ -42,12 +42,13 @@ pipeline {
 			sh"cd EAR/"
 			sh"pwd"
 			sh"ls"	
-			lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos && ls", returnStdout : true );
-			println lista + 'uuuuuuuuuuuu'
-			//lista = lista.split('/n')
+			//lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos && ls", returnStdout : true ).split('\n');
+			//	println lista[0] + 'uuuuuuuuuuuu'
 			//		a = lista.length
 			//		println a
-				}
+			//	for(i=0;i<lista.length-,i++){
+			//		lista[i];
+			//	}
 			}
 		}
 		//stage('publisher'){

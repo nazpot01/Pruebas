@@ -42,7 +42,7 @@ pipeline {
 				}
 			}
 		}
-		stage('publisher'){
+		//stage('publisher'){
 		//steps {
 			//script {
 			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos/ /var/jenkins_home/workspace/Prueba_deploy/"
@@ -54,6 +54,6 @@ pipeline {
 			//(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
 			//}
 		    //}
-		}
+		//}
 	}
 }

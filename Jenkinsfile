@@ -36,9 +36,7 @@ pipeline {
 			script{
 			sh"pwd"
 			sh"git checkout origin/${BRANCH_NAME}"
-			//sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
-			lista=sh(script: "git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done", returnStdout : true );
-			println lista
+			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 				}
 			}
 
@@ -46,13 +44,9 @@ pipeline {
 		stage('publisher'){
 		steps {
 			script {
-			/*String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/"
+			String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos/"
 			String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy/"
 			(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)*/
-			//sh"cd /var/jenkins_home/workspace/unicoarchivos" 
-			sh"pwd"
-		        lista=sh(script: "ls -l", returnStdout : true );
-			println lista	
 			}
 		    }
 		}

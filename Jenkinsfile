@@ -9,7 +9,6 @@ def componentTag
 def componentAppName
 def binder
 def lista
-//def folder = "/var/jenkins_home/workspace/unicoarchivos"
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
@@ -39,7 +38,7 @@ pipeline {
 			sh"git checkout origin/${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
 			sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy"
-			lista=sh(script: "ls", returnStdout : true );
+			lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy && ls", returnStdout : true );
 			println lista	
 				}
 			}

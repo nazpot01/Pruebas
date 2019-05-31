@@ -44,7 +44,7 @@ pipeline {
 		}
 		stage('publisher'){
 		steps {
-			sh ''' bash -c "cd /var/jenkins_home/workspace/unicoarchivos" '''
+			sh ''' bash -c "cd /var/jenkins_home/workspace/Prueba_deploy" '''
 			sh"ls -l"
 			//script {
 			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos/ /var/jenkins_home/workspace/Prueba_deploy/"

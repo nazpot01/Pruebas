@@ -37,7 +37,7 @@ pipeline {
 			sh"pwd"
 			sh"git checkout origin/${BRANCH_NAME}"
 			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
-			sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy"
+			sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy/"
 			sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy")
 			echo pwd
 			//lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy && ls", returnStdout : true );

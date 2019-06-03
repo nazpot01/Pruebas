@@ -34,35 +34,31 @@ pipeline {
 		stage('copiado'){
 		steps {
 			script{
-			sh"pwd"
-			sh"git checkout origin/${BRANCH_NAME}"
-			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
-			sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy/"
-			sh"pwd"
-			sh"cd EAR/"
-			sh"pwd"
-			sh"ls"	
+			//sh"pwd"
+			//sh"git checkout origin/${BRANCH_NAME}"
+			//sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
+			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy/"
+			//sh"pwd"
+			//sh"cd EAR/"
+			//sh"pwd"
+			//sh"ls"	
 			//lista=sh(script: "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos && ls", returnStdout : true ).split('\n');
 			//	println lista[0] + 'uuuuuuuuuuuu'
 			//		a = lista.length
 			//		println a
 			//	for(i=0;i<lista.length-,i++){
 			//		lista[i];
-			//	}
+				}
 			}
 		}
-		//stage('publisher'){
-		//steps {
-			//script {
-			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos/ /var/jenkins_home/workspace/Prueba_deploy/"
-			//sh"pwd"
-		        //lista=sh(script: "ls", returnStdout : true );
-			//println lista	
-			//String sourceFilePath = "/var/jenkins_home/workspace/unicoarchivos"
-			//String destinationFilePath = "/var/jenkins_home/workspace/Prueba_deploy"
-			//(new AntBuilder()).copy(file: sourceFilePath, tofile: destinationFilePath)
-			//}
-		    //}
-		//}
+		stage('copiado'){
+		steps {
+			script{
+				sh '''
+				bash -c "cd cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos"
+				''''
+				}
+			}
+		}
 	}
 }

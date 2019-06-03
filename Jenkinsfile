@@ -31,7 +31,7 @@ pipeline {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 				}
 			}
-		stage('copiado'){
+		//stage('copiado'){
 		//steps {
 			//script{
 			//sh"pwd"
@@ -50,7 +50,7 @@ pipeline {
 			//		lista[i];
 				//}
 			//}
-		}
+		//}
 		stage('copiado2'){
 		steps {
 			script{

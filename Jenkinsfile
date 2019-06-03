@@ -54,8 +54,8 @@ pipeline {
 		stage('copiado'){
 		steps {
 			script{
-				sh '''
-				bash -c "cd cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos"
+				sh ''' 
+					bash -c "cd cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos"
 				''''
 				}
 			}

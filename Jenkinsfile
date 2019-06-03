@@ -59,7 +59,9 @@ pipeline {
 				'''
 				}
 			}
-				steps {
+		}
+		stage('copiado3'){
+		steps {
 			script{
 				sh ''' 
 					bash -c "pwd" 

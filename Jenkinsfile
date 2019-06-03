@@ -32,7 +32,7 @@ pipeline {
 				}
 			}
 		stage('copiado'){
-		steps {
+		//steps {
 			//script{
 			//sh"pwd"
 			//sh"git checkout origin/${BRANCH_NAME}"
@@ -49,7 +49,7 @@ pipeline {
 			//	for(i=0;i<lista.length-,i++){
 			//		lista[i];
 				//}
-			}
+			//}
 		}
 		stage('copiado2'){
 		steps {

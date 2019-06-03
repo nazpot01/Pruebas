@@ -24,27 +24,6 @@ pipeline {
 		}
 
    stages {
-	
-		stage('GET_CODE_MASTER') {
-            steps {
-                step([$class: 'WsCleanup'])
-                echo "[EXEC] - Obtener código fuente desde repositorio Git"
-                checkout([
-                        $class                           : 'GitSCM',
-                        branches                         : [
-                                [name: "*/master"]
-                        ],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions                       : [],
-                        submoduleCfg                     : [],
-                        userRemoteConfigs                : [
-                                [credentialsId: "${SCM_CREDENTIALS}", url: "${SCM_URL}"]
-                        ]
-                ])
-			}
-		}
-
-	
 		stage('GET_CODE_BRANCH') {
             steps {
                 step([$class: 'WsCleanup'])

@@ -56,7 +56,7 @@ pipeline {
 			script{
 				sh ''' 
 					bash -c "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos" 
-				''''
+				'''
 				}
 			}
 		}

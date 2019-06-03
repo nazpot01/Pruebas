@@ -51,7 +51,7 @@ pipeline {
 				}
 			}
 		}
-		stage('copiado'){
+		stage('copiado2'){
 		steps {
 			script{
 				sh ''' 

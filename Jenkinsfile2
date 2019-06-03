@@ -9,6 +9,7 @@ def componentTag
 def componentAppName
 def binder
 def lista
+
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
@@ -21,6 +22,7 @@ pipeline {
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	     //	SCM_CREDENTIALS = "GitHub token ugithub"
 		 SCM_BRANCH = "*/${BRANCH_NAME}"
+		BRANCH_NAME= "RQ01" //variable
 		}
 
    stages {
@@ -31,7 +33,7 @@ pipeline {
                 checkout([
                         $class                           : 'GitSCM',
                         branches                         : [
-                                [name: "*/${BRANCH_NAME}"]
+                                [name: "${BRANCH_NAME}"]
                         ],
                         doGenerateSubmoduleConfigurations: false,
                         extensions                       : [],

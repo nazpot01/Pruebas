@@ -59,6 +59,13 @@ pipeline {
 				'''
 				}
 			}
+				steps {
+			script{
+				sh ''' 
+					bash -c "pwd" 
+				'''
+				}
+			}
 		}
 	}
 }

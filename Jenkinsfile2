@@ -64,8 +64,8 @@ pipeline {
 
 			}
 		}
-	}
-}
+	
+
 		stage('copiado'){
 		steps {
 			script{

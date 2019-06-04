@@ -30,7 +30,7 @@ pipeline {
 				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				println lista[0]
 				a = lista.length
-				
+				println a
 				componentTag = new String[lista.length]
 				componentAppName = new String[lista.length]
 				

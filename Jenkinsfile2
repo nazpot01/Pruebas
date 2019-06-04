@@ -1,17 +1,9 @@
 #!groovy
-def pushProperties
-def log
-def tokens
-def fileIncludePatterns = ''
-def deploy = 0
 def componentName
 def componentTag
-def componentAppName
-def binder
 def lista
-def proyecto = "Unico"
-def earName = "unico.ear"			//Modificar segun el nombre del ear.
-def tipo = "EAR1"//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
+def componentAppName
+
 
 
 pipeline {
@@ -25,42 +17,56 @@ pipeline {
 		}
 		
 	stages {
-
-		stage('test') {
+		stage('Test') {
                 steps {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 				}
 			}
-		stage('copiado'){
+	stage('Copy'){
 		steps {
 			script{
-			sh"pwd"
-			sh"git checkout origin/${BRANCH_NAME}"
-			//sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
-			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy/"
-			sh"ls"
-			lista=sh(script: "git diff --name-only origin/master", returnStdout : true ).split('\n');
+				sh"pwd"
+				sh"git checkout origin/${BRANCH_NAME}"
+				lista=sh(script: 'git diff --name-only origin/master | grep -Ex ".*\.[a-z]+"', returnStdout : true ).split('\n');
 				println lista[0]
 				a = lista.length
-				println a
+				
+				componentTag = new String[lista.length]
+				componentAppName = new String[lista.length]
+				
 				for(int i = 0; i < lista.length; i++){
-					/*if(a>1){						
-					n = Mensaje[2].indexOf(':')
-					println n+" este es el index"
-					if(n>=0){
-					UCD_DEPLOY = 1
-					}
-					else UCD_DEPLOY = 0
-					}
-					if (UCD_DEPLOY == 1){
-					println Mensaje[2] +" este es el mensaje"							
-					list = Mensaje[2].split(':')						
-					USSER = list[0]
-					EMAIL = USSER+"@ath.com.co"
-					println EMAIL
-					UCD_COMPONENTS=list*/
-				println lista[i];
-					}
+					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).uppercase() // somefolder/app.ear -> EAR
+					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/')), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
+					
+				}
+			}
+		}
+	}
+	stage('UPLOAD_COMPONENTS') {
+		steps {
+			script {
+				for(int i = 0; i < componentAppName.length(); i++) {
+					componentName : componentAppName[i]
+					step([$class   : 'UCDeployPublisher',
+						siteName : "${URBAN_PRD_APP}",
+						component: [
+							$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+							componentName	: componentAppName[i],
+							componentTag	: componentTag[i],
+							createComponent: [
+								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								componentApplication: "${COMPONENT_APP}"
+							],
+							delivery       : [
+								$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
+								pushVersion        : "${BUILD_ID}",
+								baseDir            : "${WORKSPACE}",
+								pushDescription    : 'Entrega de artefactos'
+								
+								}
+							]
+						]
+					])
 				}
 			}
 		}

@@ -40,7 +40,7 @@ pipeline {
 			//sh"cp -r /var/jenkins_home/workspace/unicoarchivos /var/jenkins_home/workspace/Prueba_deploy/"
 			sh"ls"
 			lista=sh(script: "git diff --name-only origin/master", returnStdout : true ).split('\n');
-				println lista[0]
+				println lista[0] + 'uuuu'
 			//		a = lista.length
 			//		println a
 			//	for(i=0;i<lista.length-,i++){

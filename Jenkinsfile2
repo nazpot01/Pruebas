@@ -51,7 +51,7 @@ pipeline {
 		steps {
 			script{
 				sh '''
-				bash -c "mkdir /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos/prueba"
+				bash -c "mkdir /var/jenkins_home/workspace/unicoarchivos/prueba"
 				'''
 				}
 			}
@@ -60,7 +60,7 @@ pipeline {
 		steps {
 		script{
 				sh '''
-				bash -c "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos/prueba"
+				bash -c "cd /var/jenkins_home/workspace/unicoarchivos/prueba"
 				'''
 				sh"pwd"
 				}

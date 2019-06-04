@@ -60,6 +60,7 @@ pipeline {
 					println EMAIL
 					UCD_COMPONENTS=list*/
 				println lista[i];
+					}
 				}
 			}
 		}

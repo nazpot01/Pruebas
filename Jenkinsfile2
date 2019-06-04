@@ -43,8 +43,23 @@ pipeline {
 				println lista[0]
 				a = lista.length
 				println a
-			//	for(i=0;i<lista.length-,i++){
-			//		lista[i];
+				for(int i = 0; i < lista.length; i++){
+					/*if(a>1){						
+					n = Mensaje[2].indexOf(':')
+					println n+" este es el index"
+					if(n>=0){
+					UCD_DEPLOY = 1
+					}
+					else UCD_DEPLOY = 0
+					}
+					if (UCD_DEPLOY == 1){
+					println Mensaje[2] +" este es el mensaje"							
+					list = Mensaje[2].split(':')						
+					USSER = list[0]
+					EMAIL = USSER+"@ath.com.co"
+					println EMAIL
+					UCD_COMPONENTS=list*/
+				println lista[i];
 				}
 			}
 		}

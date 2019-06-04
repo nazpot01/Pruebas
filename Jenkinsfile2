@@ -55,13 +55,13 @@ pipeline {
 				'''
 				}
 			}
+		}
 		stage('copiado2'){
 		steps {
 		script{
 				sh '''
 				bash -c "cd /var/jenkins_home/workspace/Prueba_deploy/unicoarchivos/prueba"
 				'''
-		}
 				}
 			}
 		}

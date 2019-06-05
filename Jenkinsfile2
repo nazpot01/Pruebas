@@ -31,8 +31,8 @@ pipeline {
 				println lista[0]
 				a = lista.length
 				println a
-				componentTag = new String[lista.length]
-				componentAppName = new String[lista.length]
+				componentTag = new String[a]
+				componentAppName = new String[a]
 				
 				for(int i = 0; i < lista.length; i++){
 					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR

@@ -27,11 +27,9 @@ pipeline {
 			script{
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
-				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
-				lista=bat(script: 'git diff --name-only origin/master)
-				
+				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				a = lista.size()
-				println a + 'longitud'
+				println a
 				componentTag = new String[a]
 				componentAppName = new String[a]
 				

@@ -8,8 +8,6 @@ def componentName
 def componentTag
 def lista
 def componentAppName
-			
-
 
 pipeline {
 	agent any

@@ -58,6 +58,7 @@ pipeline {
 			}
 		stage('copiado'){
 		steps {
+			script{
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
 				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
@@ -71,6 +72,7 @@ pipeline {
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					println componentTag[i]
 					println componentAppName[i]
+					}
 				}
 			}
 		}

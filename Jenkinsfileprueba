@@ -4,11 +4,10 @@ def pushProperties
 def log
 def tokens
 def fileIncludePatterns = ''
-def deploy = 0
 def componentName
 def componentTag
+def lista
 def componentAppName
-def binder
 def proyecto = "Unico"
 def earName = "unico.ear"			//Modificar segun el nombre del ear.
 def tipo = "EAR1"					//Modificar segun el tipo de artefacto en mayusculas, las opciones son: EAR - JASPER - XML - JAR.
@@ -20,8 +19,8 @@ pipeline {
 
 		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
 	        SCM_CREDENTIALS = "123456789"
-		SCM_BRANCH = "*/${BRANCH_NAME}"
-		BRANCH_NAME= "master"
+		SCM_BRANCH = "${BRANCH_NAME}"
+		BRANCH_NAME= "RQ01" //variable
 		}
 		
 	stages {

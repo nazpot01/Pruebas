@@ -29,13 +29,13 @@ pipeline {
 				sh"git checkout origin/${BRANCH_NAME}"
 				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				println lista[0]
-				a = lista.size
+				a = lista.lentgh
 				println a
 				componentTag = new String[a]
 				componentAppName = new String[a]
 				
-				for(int i = 0; i < lista.size; i++){
-					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].size()).toUpperCase() // somefolder/app.ear -> EAR
+				for(int i = 0; i < lista.lentgh; i++){
+					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].lentgh()).toUpperCase() // somefolder/app.ear -> EAR
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/')), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					println componentTag[i]
 					println componentAppName[i]

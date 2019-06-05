@@ -31,11 +31,10 @@ pipeline {
 				println lista[0]
 				a = lista.size()
 				println a + 'longitud'
-				println a
 				componentTag = new String[a]
 				componentAppName = new String[a]
 				
-				for(int i = 0; i < lista.size(); i++){
+				for(int i = 0; i < a; i++){
 					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/')), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					println componentTag[i]

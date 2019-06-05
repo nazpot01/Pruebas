@@ -29,7 +29,7 @@ pipeline {
 				sh"git checkout origin/${BRANCH_NAME}"
 				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				println lista[0]
-				a = lista.length
+				a = lista.length()
 				println a
 				componentTag = new String[a]
 				componentAppName = new String[a]

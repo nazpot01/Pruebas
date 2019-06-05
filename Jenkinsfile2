@@ -28,7 +28,7 @@ pipeline {
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
 				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
-				lista=bat(script: 'git diff --name-only origin/master , returnStdout : true )
+				lista=bat(script: 'git diff --name-only origin/master)
 				
 				a = lista.size()
 				println a + 'longitud'

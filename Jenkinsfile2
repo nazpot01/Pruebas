@@ -28,7 +28,7 @@ pipeline {
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
 				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
-				for(int i = 0; i < a; i++){
+				for(int i = 0; i < lista.size(); i++){
 				println i + ": " + lista[i]
 				}
 				a = lista.size()

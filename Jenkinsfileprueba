@@ -72,7 +72,7 @@ pipeline {
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					println componentTag[i]
 					println componentAppName[i]
-					}
+					} 
 				}
 			}
 		}

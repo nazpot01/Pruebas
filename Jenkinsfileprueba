@@ -61,10 +61,19 @@ pipeline {
 			}
 		stage('copiado'){
 		steps {
-			sh"pwd"
-			sh"git checkout origin/${BRANCH_NAME}"
-			sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done"
-			}
+				sh"pwd"
+				sh"git checkout origin/${BRANCH_NAME}"
+				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
+				a = lista.size()
+				println a
+				componentTag = new String[a]
+				componentAppName = new String[a]
+				
+				for(int i = 0; i < a; i++){
+					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
+					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
+					println componentTag[i]
+					println componentAppName[i]}
 		
 		}
 	}

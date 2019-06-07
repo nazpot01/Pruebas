@@ -55,7 +55,7 @@ pipeline {
 						try {
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'https://administrador-virtualbox:8443',
-							component: [
+							createcomponent: [
 								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 								componentName	: "${componentAppNameCurrent}",
 								componentTag	: "${componentTagCurrent}",

@@ -50,7 +50,7 @@ pipeline {
 					for(int i = 0; i < componentAppName.size() -1; i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-						try {
+						//try {
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'local',
 							component: [
@@ -69,8 +69,8 @@ pipeline {
 								]
 							]
 						])
-						} catch(Exception e) {
-							e.printStackTrace()
+						//} catch(Exception e) {
+						//	e.printStackTrace()
 						}
 					}
 				}

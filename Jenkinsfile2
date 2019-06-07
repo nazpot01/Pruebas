@@ -46,24 +46,23 @@ pipeline {
 		stage('UPLOAD_COMPONENTS') {
 			steps {
 				script {
-					for(int i = 0; i < componentAppName.size(); i++) {
+					for(int i = 0; i < componentAppName.length(); i++) {
 						componentName : componentAppName[i]
 						step([$class   : 'UCDeployPublisher',
-							siteName : "${URBAN_PRD_APP}",
+							siteName : 'local',
 							component: [
 								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 								componentName	: componentAppName[i],
 								componentTag	: componentTag[i],
 								createComponent: [
 									$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-									componentApplication: "${COMPONENT_APP}"
+									componentApplication: 'UNICO MANTENIMIENTO'
 								],
 								delivery       : [
 									$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 									pushVersion        : "${BUILD_ID}",
 									baseDir            : "${WORKSPACE}",
 									pushDescription    : 'Entrega de artefactos'
-									
 								]
 							]
 						])

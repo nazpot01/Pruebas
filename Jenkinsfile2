@@ -47,7 +47,7 @@ pipeline {
 		stage('UPLOAD_COMPONENTS') {
 			steps {
 				script {
-					for(int i = 0; i < componentAppName.size(); i++) {
+					for(int i = 0; i < componentAppName.size() -1; i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
 						try {

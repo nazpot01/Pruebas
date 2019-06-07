@@ -63,8 +63,6 @@ pipeline {
 									$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 									componentApplication: 'UNICO MANTENIMIENTO'
 								],
-								println BUILD_ID
-								println WORKSPACE
 								delivery       : [
 									$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 									pushVersion        : "${BUILD_NUMBER}",

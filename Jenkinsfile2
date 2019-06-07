@@ -46,7 +46,7 @@ pipeline {
 		stage('UPLOAD_COMPONENTS') {
 			steps {
 				script {
-					for(int i = 0; i < componentAppName.length(); i++) {
+					for(int i = 0; i < componentAppName.size(); i++) {
 						componentName : componentAppName[i]
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'local',

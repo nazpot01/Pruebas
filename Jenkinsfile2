@@ -48,7 +48,6 @@ pipeline {
 			steps {
 				script {
 					for(int i = 0; i < componentAppName.size(); i++) {
-						componentName : componentAppName[i]
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'local',
 							component: [

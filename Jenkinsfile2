@@ -48,14 +48,15 @@ pipeline {
 			steps {
 				script {
 					for(int i = 0; i < componentAppName.size(); i++) {
-						println "ComponentTag: " + componentTag[i]
-					        println "AppName: " + componentAppName[i]
+						componentTagCurrent = componentTag[i]
+					        componentAppNameCurrent = componentAppName[i]
+						try {
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'local',
 							component: [
 								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-								componentName	: "${componentAppName[i]}",
-								componentTag	: "${componentTag[i]}",
+								componentName	: "${componentAppNameCurrent}",
+								componentTag	: "${componentTagCurrent}",
 								createComponent: [
 									$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 									componentApplication: 'UNICO MANTENIMIENTO'
@@ -68,6 +69,9 @@ pipeline {
 								]
 							]
 						])
+						} catch(Exception e) {
+							e.printStackTrace()
+						}
 					}
 				}
 			}

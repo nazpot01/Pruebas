@@ -42,12 +42,11 @@ pipeline {
 				}
 					//for(int i = 0; i < componentAppName.size(); i++) {
 					//	println 'primer ingreso'
-						componentTagCurrent = componentTag/*[i]*/
-					        componentAppNameCurrent = componentAppName/*[i]*/
+						componentTagCurrent = componentTag[0]
+					        componentAppNameCurrent = componentAppName[0]
 					//	println ' extension ' + componentTagCurrent
 					//	println  ' nombre ' + componentAppNameCurrent
 						try {
-						println  ' khgsdjsagdjhagwdjhawgda ' + componentAppNameCurrent
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [

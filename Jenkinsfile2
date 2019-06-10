@@ -39,16 +39,8 @@ pipeline {
 					//println componentTag[i]
 					println componentTag[i]
 					//println componentAppName[i]
-				}
-			}
-		}
-	}
-		println componentTag
-		println componentAppName
-		
-		stage('UPLOAD_COMPONENTS') {
-			steps {
-				script {
+				
+					}
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]

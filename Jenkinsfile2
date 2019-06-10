@@ -36,15 +36,14 @@ pipeline {
 				for(int i = 0; i < a; i++){
 					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
-					//println componentTag[i]
 					println componentTag[i]
-					//println componentAppName[i]
+					println componentAppName[i]
 				
-					}
+				}
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-						println ' extencion ' + componentTagCurrent
+						println ' extension ' + componentTagCurrent
 						println  ' nombre ' + componentAppNameCurrent
 						try {
 						   step([$class: 'UCDeployPublisher',

@@ -59,7 +59,7 @@ pipeline {
 								],
 								delivery       : [
 									$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-									pushVersion        : "1",
+									pushVersion        : '${BUILD_NUMBER}',
 									baseDir            : "var/lib/jenkins/workspace/unicoprueba",
 									pushDescription    : 'Entrega de artefactos'
 								]
@@ -67,7 +67,7 @@ pipeline {
 						])
 						} catch(Exception e) {
 							e.printStackTrace();
-							println 'Execion' + e
+							println 'Execion' + e.printStackTrace()
 						}
 					}
 				}

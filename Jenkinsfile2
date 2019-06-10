@@ -43,6 +43,8 @@ pipeline {
 			}
 		}
 	}
+		println componentTag
+		println componentAppName
 		
 		stage('UPLOAD_COMPONENTS') {
 			steps {

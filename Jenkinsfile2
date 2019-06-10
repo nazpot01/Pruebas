@@ -44,15 +44,16 @@ pipeline {
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-						println 'extencion' + componentTagCurrent
-						println  'nombre' + componentAppNameCurrent
+						println ' extencion ' + componentTagCurrent
+						println  ' nombre ' + componentAppNameCurrent
+						println ${componentTagCurrent} + ' Variable '
 						try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: 'unico1',
-							    componentTag: 'EAR',
+							    componentName: ${componentTagCurrent}
+								componentTag: ${componentTagCurrent}
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',

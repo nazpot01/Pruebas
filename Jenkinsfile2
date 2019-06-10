@@ -47,6 +47,7 @@ pipeline {
 						println ' extension ' + componentTagCurrent
 						println  ' nombre ' + componentAppNameCurrent
 						try {
+						println  ' nombre ' + componentAppNameCurrent
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
@@ -71,8 +72,7 @@ pipeline {
 							]
 						    ])
 						} catch(Exception e) {
-							println e.printStackTrace();
-							println 'Execion' + e.getMessage()
+							println 'Exception' + e.getMessage()
 						}
 					}
 				}

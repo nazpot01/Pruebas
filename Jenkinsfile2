@@ -58,7 +58,7 @@ pipeline {
 							createcomponent: [
 								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 								componentName	: "${componentAppNameCurrent}",
-								componentTag	: "${componentTagCurrent},
+								componentTag	: "${componentTagCurrent}",
 								createComponent: [
 									$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 									componentApplication: 'UNICO MANTENIMIENTO'

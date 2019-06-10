@@ -51,8 +51,8 @@ pipeline {
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: componentAppNameCurrent,
-								componentTag: componentTagCurrent,
+							    componentName: componentAppName[i],
+								componentTag:  componentTag[i],
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',

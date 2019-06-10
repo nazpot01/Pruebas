@@ -23,6 +23,9 @@ pipeline {
 				}
 			}
 	stage('Copy'){
+		try {
+		
+		
 		steps {
 			script{
 				sh"pwd"
@@ -40,12 +43,12 @@ pipeline {
 					println componentAppName[i]
 				
 				}
-					for(int i = 0; i < componentAppName.size(); i++) {
-						componentTagCurrent = componentTag[i]
-					        componentAppNameCurrent = componentAppName[i]
-						println ' extension ' + componentTagCurrent
-						println  ' nombre ' + componentAppNameCurrent
-						try {
+				for(int i = 0; i < componentAppName.size(); i++) {
+					componentTagCurrent = componentTag[i]
+					componentAppNameCurrent = componentAppName[i]
+					println ' extension ' + componentTagCurrent
+					println  ' nombre ' + componentAppNameCurrent
+					
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
@@ -69,13 +72,14 @@ pipeline {
 							    ]
 							]
 						    ])
-						} catch(Exception e) {
-							println e.printStackTrace();
-							println 'Execion' + e.getMessage()
-						}
+						
 					}
 				}
 			}
+		} catch(Exception e) {
+							println e.printStackTrace();
+							println 'Execion' + e.getMessage()
+						}	
 		}
 		
 	}

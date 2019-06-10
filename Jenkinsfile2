@@ -42,7 +42,7 @@ pipeline {
 							
 							}
 							for(int i = 0; i < componentAppName.size(); i++) {
-								println [i]+ 'ingreso al for 2'
+								println ' ingreso al for 2 ' + i
 								componentTagCurrent = componentTag[i]
 								componentAppNameCurrent = componentAppName[i]
 								println ' extension ' + componentTagCurrent

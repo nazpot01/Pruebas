@@ -51,8 +51,8 @@ pipeline {
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: componentAppName[i],
-								componentTag:  componentTag[i],
+							    componentName: componentAppNameCurrent,
+								componentTag:  componentTagCurrent,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',
@@ -65,7 +65,8 @@ pipeline {
 								fileIncludePatterns: '',
 								fileExcludePatterns: '',
 								pushProperties: '',
-								pushDescription: 'Pushed from Jenkins'
+								pushDescription: 'Pushed from Jenkins',
+								pushIncremental: false
 							    ]
 							]
 						    ])

@@ -29,7 +29,7 @@ pipeline {
 				sh"git checkout origin/${BRANCH_NAME}"
 				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				a = lista.size()
-				println a + 'uuu'
+				println a
 				componentTag = new String[a]
 				componentAppName = new String[a]
 				
@@ -52,7 +52,7 @@ pipeline {
 					        componentAppNameCurrent = componentAppName[i]
 						println componentTagCurrent + ' ext '
 						println componentAppNameCurrent + ' name '
-						try { printl + ' voy por el try sin excepciones '
+						try { println + ' voy por el try sin excepciones '
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'https://administrador-virtualbox:8443',
 							createcomponent: [

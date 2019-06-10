@@ -33,47 +33,50 @@ pipeline {
 				componentTag = new String[a]
 				componentAppName = new String[a]
 				
-				for(int i = 0; i < lista.length; i++){
+				for(int i = 0; i < a; i++){
 					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					println componentTag[i]
 					println componentAppName[i]
+				
 				}
-			}
-		}
-	}
-		stage('UPLOAD_COMPONENTS') {
-			steps {
-				script {
-					
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
-						componentAppNameCurrent = componentAppName[i]
-						println ' extension ' + componentTagCurrent
-						println  ' nombre ' + componentAppNameCurrent
-						
-						step([$class   : 'UCDeployPublisher',
-							siteName : 'Connect_Jenkins_Ucd',
+					        componentAppNameCurrent = componentAppName[i]
+						println ' extension ' + componentTagCurrent[i]
+						println  ' nombre ' + componentAppNameCurrent[i]
+						try {
+						   step([$class: 'UCDeployPublisher',
+							siteName: 'Connect_Jenkins_Ucd',
 							component: [
-								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-								componentName	: componentAppNameCurrent,
-								componentTag	: componentTagCurrent,
-								createComponent: [
-									$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-									componentApplication: 'UNICO MANTENIMIENTO'
-								],
-								delivery       : [
-									$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-									pushVersion        : "${BUILD_ID}",
-									baseDir            : "${WORKSPACE}",
-									pushDescription    : 'Entrega de artefactos'
-									
-								]
+							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+							    componentName: componentAppNameCurrent,
+								componentTag:  componentTagCurrent,
+							    createComponent: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								componentTemplate: '',
+								componentApplication: 'UNICO_MANTENIMIENTO'
+							    ],
+							    delivery: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
+								pushVersion: "${BUILD_NUMBER}",
+								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
+								fileIncludePatterns: '',
+								fileExcludePatterns: '',
+								pushProperties: '',
+								pushDescription: 'Pushed from Jenkins',
+								pushIncremental: false
+							    ]
 							]
-						])
+						    ])
+						} catch(Exception e) {
+							println e.printStackTrace();
+							println 'Execion' + e.getMessage()
+						}
 					}
 				}
 			}
 		}
+		
 	}
 }

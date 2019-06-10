@@ -46,7 +46,6 @@ pipeline {
 					        componentAppNameCurrent = componentAppName[i]
 						println ' extencion ' + componentTagCurrent
 						println  ' nombre ' + componentAppNameCurrent
-						println componentTagCurrent + ' Variable '
 						try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
@@ -62,7 +61,7 @@ pipeline {
 							    delivery: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: '${BUILD_NUMBER}',
-								baseDir: 'var/lib/jenkins/workspace/unicoprueba',
+								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
 								fileIncludePatterns: '',
 								fileExcludePatterns: '',
 								pushProperties: '',
@@ -72,7 +71,7 @@ pipeline {
 						    ])
 						} catch(Exception e) {
 							e.printStackTrace();
-							println 'Execion' + e.printStackTrace()
+							println 'Execion' + e.getMessage()
 						}
 					}
 				}

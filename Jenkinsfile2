@@ -51,20 +51,16 @@ pipeline {
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: 'Unico1',
-								componentTag:  'EAR',
+							    componentName: "Unico1",
+								componentTag:  "EAR",
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-								componentTemplate: '',
 								componentApplication: 'UNICO_MANTENIMIENTO'
 							    ],
 							    delivery: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
-								fileIncludePatterns: '',
-								fileExcludePatterns: '',
-								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',
 								pushIncremental: false
 							    ]

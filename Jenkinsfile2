@@ -55,7 +55,7 @@ pipeline {
 								componentTag:  "EAR",
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-								componentApplication: 'UNICO_MANTENIMIENTO'
+								//componentApplication: 'UNICO_MANTENIMIENTO'
 							    ],
 							    delivery: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',

@@ -47,24 +47,28 @@ pipeline {
 						println 'extencion' + componentTagCurrent
 						println  'nombre' + componentAppNameCurrent
 						try {
-						step([$class   : 'UCDeployPublisher',
-							siteName : 'https://administrador-virtualbox:8443',
-							Component: [
-								$class		: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-								componentName	: "${componentAppNameCurrent}",
-								componentTag	: "${componentTagCurrent}",
-								createComponent: [
-									$class		: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-									componentApplication: 'UNICO_MANTENIMIENTO'
-								],
-								delivery       : [
-									$class             : 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-									pushVersion        : '${BUILD_NUMBER}',
-									baseDir            : "/var/lib/jenkins/workspace/unicoprueba",
-									pushDescription    : 'Entrega de artefactos'
-								]
+						   step([$class: 'UCDeployPublisher',
+							siteName: 'https://administrador-virtualbox:8443',
+							component: [
+							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+							    componentName: 'unico1',
+							    componentTag: 'EAR',
+							    createComponent: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								componentTemplate: '',
+								componentApplication: 'UNICO_MANTENIMIENTO'
+							    ],
+							    delivery: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
+								pushVersion: '${BUILD_NUMBER}',
+								baseDir: 'var/lib/jenkins/workspace/unicoprueba',
+								fileIncludePatterns: '',
+								fileExcludePatterns: '',
+								pushProperties: '',
+								pushDescription: 'Pushed from Jenkins'
+							    ]
 							]
-						])
+						    ])
 						} catch(Exception e) {
 							e.printStackTrace();
 							println 'Execion' + e.printStackTrace()

@@ -46,14 +46,14 @@ pipeline {
 					        componentAppNameCurrent = componentAppName[i]
 						println ' extencion ' + componentTagCurrent
 						println  ' nombre ' + componentAppNameCurrent
-						println ${componentTagCurrent} + ' Variable '
+						println '${componentTagCurrent}' + ' Variable '
 						try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: ${componentTagCurrent}
-								componentTag: ${componentTagCurrent}
+							    componentName: '${componentAppNameCurrent}',
+								componentTag: '${componentTagCurrent}',
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',

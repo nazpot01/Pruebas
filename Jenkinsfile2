@@ -52,7 +52,7 @@ pipeline {
 					        componentAppNameCurrent = componentAppName[i]
 						println componentTagCurrent + ' ext '
 						println componentAppNameCurrent + ' name '
-						try {
+						try { printl + ' voy por el try sin excepciones '
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'https://administrador-virtualbox:8443',
 							createcomponent: [

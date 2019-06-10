@@ -22,65 +22,46 @@ pipeline {
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 				}
 			}
-	stage('Copy'){
-		steps {
-			script{
-				
-			try {
-				
-					sh"pwd"
-					sh"git checkout origin/${BRANCH_NAME}"
-					lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
-					a = lista.size()
-					println a
-					componentTag = new String[a]
-					componentAppName = new String[a]
-					
-					for(int i = 0; i < a; i++){
-						componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
-						componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
-						println componentTag[i]
-						println componentAppName[i]
-					
-					}
-					for(int i = 0; i < componentAppName.size(); i++) {
-						componentTagCurrent = componentTag[i]
-						componentAppNameCurrent = componentAppName[i]
-						println ' extension ' + componentTagCurrent
-						println  ' nombre ' + componentAppNameCurrent
-						
-							   step([$class: 'UCDeployPublisher',
-								siteName: 'Connect_Jenkins_Ucd',
-								component: [
-									$class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-									componentName: componentAppNameCurrent,
-									componentTag:  componentTagCurrent,
-									createComponent: [
-									$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-									componentTemplate: '',
-									componentApplication: 'UNICO_MANTENIMIENTO'
-									],
-									delivery: [
-									$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-									pushVersion: "${BUILD_NUMBER}",
-									baseDir: '/var/lib/jenkins/workspace/unicoprueba',
-									fileIncludePatterns: '',
-									fileExcludePatterns: '',
-									pushProperties: '',
-									pushDescription: 'Pushed from Jenkins',
-									pushIncremental: false
-									]
-								]
-								])
+		stage('Copy'){
+			steps {
+				script{				
+					try {				
+							sh"pwd"
+							sh"git checkout origin/${BRANCH_NAME}"
+							lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
+							a = lista.size()
+							println a
+							componentTag = new String[a]
+							componentAppName = new String[a]
 							
-						}
-				} catch(Exception e) {
+							for(int i = 0; i < a; i++){
+								componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
+								componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
+								println componentTag[i]
+								println componentAppName[i]
+							
+							}
+							for(int i = 0; i < componentAppName.size(); i++) {
+								println [i]+ 'ingreso al for 2'
+								componentTagCurrent = componentTag[i]
+								componentAppNameCurrent = componentAppName[i]
+								println ' extension ' + componentTagCurrent
+								println  ' nombre ' + componentAppNameCurrent
+								
+								step([$class: 'UCDeployPublisher', siteName: 'Connect_Jenkins_Ucd',
+									component: [$class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock', componentName: componentAppNameCurrent, componentTag:  componentTagCurrent,
+									createComponent: [$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock', componentTemplate: '', componentApplication: 'UNICO_MANTENIMIENTO'	],
+									delivery: [$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push', pushVersion: "${BUILD_NUMBER}", baseDir: '/var/lib/jenkins/workspace/unicoprueba', fileIncludePatterns: '',
+									fileExcludePatterns: '', pushProperties: '', pushDescription: 'Pushed from Jenkins', pushIncremental: false]]
+								])
+									
+							}
+						} catch(Exception e) {
 							println e.printStackTrace();
 							println 'Execion' + e.getMessage()
 						}	
 				}
 			}
-		}
-		
+		}		
 	}
 }

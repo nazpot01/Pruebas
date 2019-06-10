@@ -44,8 +44,8 @@ pipeline {
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-						println componentTagCurrent
-						println componentAppNameCurrent
+						println 'extencion' + componentTagCurrent
+						println  'nombre' + componentAppNameCurrent
 						try {
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'https://administrador-virtualbox:8443',

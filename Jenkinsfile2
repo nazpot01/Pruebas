@@ -47,7 +47,7 @@ pipeline {
 						println ' extension ' + componentTagCurrent
 						println  ' nombre ' + componentAppNameCurrent
 						try {
-						println  ' nombre ' + componentAppNameCurrent
+						println  ' khgsdjsagdjhagwdjhawgda ' + componentAppNameCurrent
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [

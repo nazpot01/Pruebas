@@ -37,7 +37,7 @@ pipeline {
 					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					//println componentTag[i]
-					println componentTag[i] + ' prueba '
+					println componentTag[i]
 					//println componentAppName[i]
 				}
 			}
@@ -50,8 +50,8 @@ pipeline {
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-						println componentTagCurrent
-						println componentAppNameCurrent
+						println componentTagCurrent + ' ext '
+						println componentAppNameCurrent + ' name '
 						try {
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'https://administrador-virtualbox:8443',
@@ -73,7 +73,7 @@ pipeline {
 						])
 						} catch(Exception e) {
 							e.printStackTrace();
-							println e
+							println e + ' exception '
 						}
 					}
 				}

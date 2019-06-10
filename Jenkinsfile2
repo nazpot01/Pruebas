@@ -51,7 +51,7 @@ pipeline {
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: "Unico1",
+							    componentName: "unico1",
 								componentTag:  "EAR",
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',

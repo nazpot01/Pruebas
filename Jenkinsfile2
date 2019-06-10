@@ -50,9 +50,9 @@ pipeline {
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-						println componentTagCurrent + ' ext '
-						println componentAppNameCurrent + ' name '
-						try { println + ' voy por el try sin excepciones '
+						println componentTagCurrent
+						println componentAppNameCurrent
+						try {
 						step([$class   : 'UCDeployPublisher',
 							siteName : 'https://administrador-virtualbox:8443',
 							createcomponent: [
@@ -73,7 +73,7 @@ pipeline {
 						])
 						} catch(Exception e) {
 							e.printStackTrace();
-							println e + ' exception '
+							println e
 						}
 					}
 				}

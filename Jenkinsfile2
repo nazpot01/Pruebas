@@ -53,10 +53,10 @@ pipeline {
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: "unico1",
 								componentTag:  "EAR",
-							    createComponent: [
-								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-								componentApplication: 'UNICO_MANTENIMIENTO'
-							    ],
+							    //createComponent: [
+								//$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								//componentApplication: 'UNICO_MANTENIMIENTO'
+							    //],
 							    delivery: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",

@@ -48,7 +48,7 @@ pipeline {
 						println  'nombre' + componentAppNameCurrent
 						try {
 						   step([$class: 'UCDeployPublisher',
-							siteName: 'https://administrador-virtualbox:8443',
+							siteName: 'Conect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: 'unico1',

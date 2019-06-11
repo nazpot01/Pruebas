@@ -33,31 +33,10 @@ pipeline {
 				sh"git diff --name-only origin/master | while read -r line; do cp \${line} /tmp/archivos ; done"
 				print "Listando el directorio"
 				def dir = new File("/tmp/archivos")
-				dir.eachFileRecurse (FileType.FILES) { file -> lista << file
-				}
-				//lista=sh(script: "cd /tmp/archivos && ls", returnStdout : true ).split('\n');
-				//println lista
-				//grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
-				println lista
-				a = lista.size()
-				println a
-				componentTag = new String[a]
-				componentAppName = new String[a]
-				
-				for(int i = 0; i < a; i++){
-					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
-					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
-					println componentTag[i]
-					println componentAppName[i]
-				
-				}
-					for(int i = 0; i < componentAppName.size(); i++) {
-						println 'primer ingreso'
-						componentTagCurrent = componentTag[i]
-					        componentAppNameCurrent = componentAppName[i]
-						println ' extension ' + componentTagCurrent
-						println  ' nombre ' + componentAppNameCurrent
-						try {
+				dir.eachFile{
+					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
+					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
+					try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
@@ -85,7 +64,10 @@ pipeline {
 							println e.printStackTrace();
 							println 'Execion' + e.getMessage()
 						}
-					}
+				}
+				
+				
+					
 				}
 			}
 		}

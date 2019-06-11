@@ -28,8 +28,8 @@ pipeline {
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
 				sh"mkdir /var/jenkins_home/workspace/unicoprueba/archivos && chmod 777 archivos"
-				lista=sh(script: 'git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done" , returnStdout : true ).split('\n');    
-					 //grep -Ex ".*\\.[a-z]+"'
+				lista=sh(script: 'git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/unicoarchivos ; done");    
+					 //grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				a = lista.size()
 				println a
 				componentTag = new String[a]

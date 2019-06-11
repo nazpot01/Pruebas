@@ -2,7 +2,7 @@
 import groovy.io.FileType
 def componentName
 def componentTag
-def lista
+def lista = []
 def componentAppName
 def directorio = "/tmp/archivos"
 
@@ -33,8 +33,7 @@ pipeline {
 				sh"git diff --name-only origin/master | while read -r line; do cp \${line} /tmp/archivos ; done"
 				print "Listando el directorio"
 				def dir = new File(directorio)
-				dir.eachFileRecurse (FileType.FILES) { file ->
-				  lista << file
+				dir.eachFileRecurse (FileType.FILES) { file -> lista << file
 				}
 				//lista=sh(script: "cd /tmp/archivos && ls", returnStdout : true ).split('\n');
 				//println lista

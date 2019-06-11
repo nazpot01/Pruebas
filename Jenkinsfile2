@@ -36,7 +36,7 @@ pipeline {
 				dir.eachFile{
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
-					println componentTagCurrent
+					println componentAppNameCurrent
 					
 					try {
 						   step([$class: 'UCDeployPublisher',

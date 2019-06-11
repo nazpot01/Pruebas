@@ -27,8 +27,8 @@ pipeline {
 			script{
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
-				sh"mkdir /var/jenkins_home/workspace/archivos && chmod 777 archivos"
-				lista=sh'''(script: 'git diff --name-only origin/master | while read -r line; do cp \${line} /var/jenkins_home/workspace/archivos ; done")'''    
+				sh"mkdir /tmp/archivos && chmod 777 archivos"
+				lista=sh'''(script: 'git diff --name-only origin/master | while read -r line; do cp \${line} /tmp/archivos ; done")'''    
 					 //grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
 				a = lista.size()
 				println a

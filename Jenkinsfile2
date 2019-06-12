@@ -20,10 +20,13 @@ pipeline {
 		}
 		
 	stages {
-		stage('Test') {
+		stage('Repository') {
                 steps {
+			script{
+				checkout([$class: 'GitSCM', branches: [[name: '*/master', ${BRANCH_NAME}]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: SCM_CREDENTIALS, url: SCM_URL]]])
                     echo "[EXEC] - Obtener código fuente desde repositorio Git"
 				}
+		}
 			}
 	stage('Copy'){
 		steps {
@@ -45,7 +48,7 @@ pipeline {
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: componentAppNameCurrent,
-								componentTag: '',
+								componentTag: componentTagCurrent,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',

@@ -37,6 +37,7 @@ pipeline {
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
+					zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
 					println artefact
 					try {
 						   step([$class: 'UCDeployPublisher',
@@ -44,7 +45,7 @@ pipeline {
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: componentAppNameCurrent,
-								componentTag:  componentTagCurrent,
+								componentTag: '',
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',
@@ -55,7 +56,7 @@ pipeline {
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
 								fileIncludePatterns: '',
-								fileExcludePatterns: '',
+								fileExcludePatterns: '*.zip',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',
 								pushIncremental: false

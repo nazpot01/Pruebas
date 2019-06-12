@@ -8,7 +8,6 @@ def directorio = "/tmp/archivos"
 
 
 
-
 pipeline {
 	agent any
 	   	environment {

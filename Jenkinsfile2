@@ -38,9 +38,7 @@ pipeline {
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}.${componentTagCurrent}) || true")
-					
-					
-					sh"rm -R dir"
+		
 					try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
@@ -69,6 +67,7 @@ pipeline {
 							println e.printStackTrace();
 							println 'Execion' + e.getMessage()
 						}
+					sh"rm -R ${dir}"
 				}
 				
 				

@@ -42,7 +42,6 @@ pipeline {
 				}
 				
 					for(int i = 0; i < componentAppName.size(); i++) {
-						println 'primer ingreso'
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
 						println ' extension ' + componentTagCurrent

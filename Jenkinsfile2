@@ -28,7 +28,10 @@ pipeline {
 			script{
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
-				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
+				sh"mkdir /var/lib/jenkins/workspace/unicoprueba/archivos"
+				lista=sh(script: 'git diff --name-only origin/master | while read -r line; do cp \${line} /var/lib/jenkins/workspace/unicoprueba/archivos ; done"
+				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
+				def dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
 				a = lista.size()
 				println a
 				componentTag = new String[a]
@@ -39,24 +42,25 @@ pipeline {
 					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
 					println componentTag[i]
 					println componentAppName[i]
+					sh"rm -R dir"
 				}
-				
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
+						artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}.${componentTagCurrent}) || true")
 						println ' extension ' + componentTagCurrent
 						println  ' nombre ' + componentAppNameCurrent
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: componentAppNameCurrent,
+							    	componentName: componentAppNameCurrent,
 								componentTag:  componentTagCurrent,
-							    //createComponent: [
-								//$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-								//componentTemplate: '',
-								//componentApplication: 'UNICO_MANTENIMIENTO'
-							    //],
+							    createComponent: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								componentTemplate: '',
+								componentApplication: 'UNICO_MANTENIMIENTO'
+							    ],
 							    delivery: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",

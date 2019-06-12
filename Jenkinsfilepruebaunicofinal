@@ -1,0 +1,80 @@
+#!groovy
+import groovy.io.FileType
+def componentName
+def componentTag
+def lista
+def componentAppName
+def directorio = "/tmp/archivos"
+
+
+
+
+pipeline {
+	agent any
+	   	environment {
+
+		SCM_URL = "https://github.com/nazpot01/Pruebas.git"
+	        SCM_CREDENTIALS = "123456789"
+		SCM_BRANCH = "${BRANCH_NAME}"
+		BRANCH_NAME= "RQ02" //variable
+		}
+		
+	stages {
+		stage('Repository') {
+                steps {
+			echo "[EXEC] - Obtener código fuente desde repositorio Git"
+				}
+			}
+	stage('Copy'){
+		steps {
+			script{
+				sh"pwd"
+				sh"git checkout origin/${BRANCH_NAME}"
+				sh"mkdir /var/lib/jenkins/workspace/unicoprueba/archivos"
+				sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/lib/jenkins/workspace/unicoprueba/archivos ; done"
+				def dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
+				dir.eachFile{
+					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
+					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
+					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
+					zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
+					println artefact
+					try {
+						   step([$class: 'UCDeployPublisher',
+							siteName: 'Connect_Jenkins_Ucd',
+							component: [
+							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+							    componentName: componentAppNameCurrent,
+								componentTag: componentTagCurrent,
+							    createComponent: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+								componentTemplate: '',
+								componentApplication: 'UNICO_MANTENIMIENTO'
+							    ],
+							    delivery: [
+								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
+								pushVersion: "${BUILD_NUMBER}",
+								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
+								fileIncludePatterns: '',
+								fileExcludePatterns: '*.zip',
+								pushProperties: '',
+								pushDescription: 'Pushed from Jenkins',
+								pushIncremental: false
+							    ]
+							]
+						    ])
+						} catch(Exception e) {
+							println e.printStackTrace();
+							println 'Execion' + e.getMessage()
+						}
+					sh"rm -R ${dir}"
+				}
+				
+				
+					
+				}
+			}
+		}
+		
+	}
+}

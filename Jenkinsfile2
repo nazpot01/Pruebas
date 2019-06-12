@@ -22,11 +22,8 @@ pipeline {
 	stages {
 		stage('Repository') {
                 steps {
-			script{
-				checkout([$class: 'GitSCM', branches: [[name: ${BRANCH_NAME}]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: SCM_CREDENTIALS, url: SCM_URL]]])
-                    		//echo "[EXEC] - Obtener código fuente desde repositorio Git"
+			echo "[EXEC] - Obtener código fuente desde repositorio Git"
 				}
-		}
 			}
 	stage('Copy'){
 		steps {

@@ -37,7 +37,7 @@ pipeline {
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
 					zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
-					sh 'mv **/target/*.ear .'
+					//sh 'mv **/target/*.ear .'
 					println artefact
 					try {
 						   step([$class: 'UCDeployPublisher',

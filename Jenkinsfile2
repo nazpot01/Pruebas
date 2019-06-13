@@ -4,7 +4,6 @@ def componentName
 def componentTag
 def lista
 def componentAppName
-def directorio = "/tmp/archivos"
 
 
 
@@ -34,6 +33,7 @@ pipeline {
 				def dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
 				dir.eachFile{
 					componentAppName = it.getName().toString().substring(0,it.getName().toString().length()-4)
+					println componentAppName
 					//componentTag=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppName}) || true")
 				}

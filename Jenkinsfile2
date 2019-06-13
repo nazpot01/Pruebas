@@ -27,7 +27,7 @@ pipeline {
 		steps {
 			script{
 				sh"pwd"
-				sh"git checkout origin/${BRANCH_NAME}"
+				sh"git checkout origin/RQ02"
 				println 'aqui estoy -----'
 				sh"mkdir /var/lib/jenkins/workspace/unicoprueba/archivos"
 				sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/lib/jenkins/workspace/unicoprueba/archivos ; done"

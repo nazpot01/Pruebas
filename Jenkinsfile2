@@ -35,6 +35,7 @@ pipeline {
 				a = lista.size()
 				dir.eachFile{
 					for(int i = 0; i < a; i++){
+						print lista[i].toString()
 					componentAppNameCurrent = lista[i].toString().substring(0,it.getName().toString().length()-4)
 						println componentAppNameCurrent + 'obteniendo nombre'
 					componentTagCurrent =  lista[i].toString().substring(it.getName().toString().length()-3,it.getName().toString().length())

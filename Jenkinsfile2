@@ -3,6 +3,7 @@ def componentName
 def componentTag
 def lista
 def componentAppName
+def dir = '/var/lib/jenkins/workspace/unicoprueba/archivos'
 
 
 
@@ -27,7 +28,9 @@ pipeline {
 			script{
 				sh"pwd"
 				sh"git checkout origin/${BRANCH_NAME}"
-				lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+"', returnStdout : true ).split('\n');
+				sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/lib/jenkins/workspace/unicoprueba/archivos ; done"
+				lista = sh(returnStdout: true, script: "(ls -p ${dir} | grep .ear) || true").split('\n');
+				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+" | ', returnStdout : true ).split('\n');
 				a = lista.size()
 				println a
 				componentTag = new String[a]

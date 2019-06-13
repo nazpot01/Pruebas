@@ -1,9 +1,10 @@
+//--- EL ULTIMO QUE HA QUEDADO MEJOR
 #!groovy
+import groovy.io.FileType
 def componentName
 def componentTag
 def lista
 def componentAppName
-def dir = '/var/lib/jenkins/workspace/unicoprueba/archivos'
 
 
 
@@ -18,9 +19,9 @@ pipeline {
 		}
 		
 	stages {
-		stage('Test') {
+		stage('Repository') {
                 steps {
-                    echo "[EXEC] - Obtener código fuente desde repositorio Git"
+			echo "[EXEC] - Obtener código fuente desde repositorio Git"
 				}
 			}
 	stage('Copy'){
@@ -30,31 +31,21 @@ pipeline {
 				sh"git checkout origin/${BRANCH_NAME}"
 				sh"mkdir /var/lib/jenkins/workspace/unicoprueba/archivos"
 				sh"git diff --name-only origin/master | while read -r line; do cp \${line} /var/lib/jenkins/workspace/unicoprueba/archivos ; done"
-				lista = sh(returnStdout: true, script: "(ls ${dir} | grep .ear) || true").split('\n');
-				println dir
-				//zip zipFile: "ear.zip", dir: "${workspace}/archivos", glob: "**/*"
-				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+" | ', returnStdout : true ).split('\n');
-				println lista.toString() + 'aqui estoy -----'
-				a = lista.size()
-				componentTag = new String[a]
-				componentAppName = new String[a]
-				
-				for(int i = 0; i < a; i++){
-					componentTag[i] = lista[i].substring(lista[i].lastIndexOf('.') + 1, lista[i].length()).toUpperCase() // somefolder/app.ear -> EAR
-					componentAppName[i] = lista[i].substring(Math.max(0, lista[i].lastIndexOf('/') + 1), lista[i].lastIndexOf('.')) // somefolder/app.ear -> app
-					println componentTag[i]
-					println componentAppName[i] 
-				}
-					for(int i = 0; i < componentAppName.size(); i++) {
-						componentTagCurrent = componentTag[i]
-					        componentAppNameCurrent = componentAppName[i]
-						try {
+				def dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
+				dir.eachFile{
+					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
+					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
+					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
+					zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
+					println artefact
+					try {
+						
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: componentAppNameCurrent,
-								componentTag:  componentTagCurrent,
+								componentTag: componentTagCurrent,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',
@@ -64,8 +55,7 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
-								fileIncludePatterns: '.*',
-								    //componentAppNameCurrent+'.'+componentTagCurrent
+								fileIncludePatterns: '*.'+componentTagCurrent,
 								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',
@@ -77,13 +67,14 @@ pipeline {
 							println e.printStackTrace();
 							println 'Execion' + e.getMessage()
 						}
-					}
+					sh"rm -R ${dir}"
+				}
+				
+				
+					
 				}
 			}
 		}
 		
 	}
 }
-
-
-

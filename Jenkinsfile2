@@ -39,11 +39,12 @@ pipeline {
 					zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
 					println artefact
 					try {
+						
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: componentAppNameCurrent,
+							    componentName: artefact,
 								componentTag: componentTagCurrent,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',

@@ -35,14 +35,8 @@ pipeline {
 				a = lista.size()
 				dir.eachFile{
 					for(int i = 0; i < a; i++){
-						print lista[i].toString()
 					componentAppNameCurrent = lista[i].toString().substring(4,lista[i].toString().length()-4)
-						println componentAppNameCurrent + 'obteniendo nombre'
 					componentTagCurrent =  lista[i].toString().substring(lista[i].toString().length()-3,lista[i].toString().length())
-						print componentTagCurrent + 'obteniendo ext'
-					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
-					//zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
-					println artefact
 					try {
 						
 						   step([$class: 'UCDeployPublisher',
@@ -60,7 +54,7 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
-								fileIncludePatterns: componentAppNameCurrent+'.ear',
+								fileIncludePatterns: componentAppNameCurrent+'.'+componentTagCurrent,
 								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',

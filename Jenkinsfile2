@@ -1,4 +1,3 @@
-
 #!groovy
 import groovy.io.FileType
 def componentName

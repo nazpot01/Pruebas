@@ -44,9 +44,8 @@ pipeline {
 					println componentAppName[i] 
 				}
 					for(int i = 0; i < componentAppName.size(); i++) {
-						componentTagCurrent = componentTag[i]
-						println componentTag[i]
-					        componentAppNameCurrent = componentAppName[i]
+						println componentTagCurrent = componentTag[i]
+					        println componentAppNameCurrent = componentAppName[i]
 						try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',

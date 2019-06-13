@@ -35,7 +35,7 @@ pipeline {
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
-					zip zipFile: "ear.zip", dir: "${workspace}/${archivos}"
+					zip "ear.zip", dir: "${workspace}/${archivos}"
 					println artefact
 					try {
 						
@@ -53,7 +53,7 @@ pipeline {
 							    delivery: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
-								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
+								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
 								fileIncludePatterns: '*.zip',
 								fileExcludePatterns: '',
 								pushProperties: '',

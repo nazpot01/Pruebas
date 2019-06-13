@@ -63,10 +63,10 @@ pipeline {
 							]
 						    ])
 						} catch(Exception e) {
-							println e.printStackTrace();
 							println 'Execion' + e.getMessage()
 						}
 					sh"cd /var/lib/jenkins/workspace/unicoprueba/archivos && rm -r ${componentAppNameCurrent}'.'${componentTagCurrent}"
+					dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
 				}
 				
 				

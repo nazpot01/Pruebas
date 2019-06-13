@@ -34,23 +34,22 @@ pipeline {
 				def dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
 				dir.eachFile{
 					componentAppName = it.getName().toString().substring(0,it.getName().toString().length()-4)
-					componentTag=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
-					//artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppName}) || true")
-					println componentAppName
+					//componentTag=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
+					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppName}) || true")
 				}
 					try {
 						for(int i = 0; i < componentAppName.size(); i++) {
-						println 'primer ingreso'
-						componentTagCurrent = componentTag
+						println componentAppName
+						/*componentTagCurrent = componentTag
 					        componentAppNameCurrent = componentAppName
 						println ' extension ' + componentTagCurrent
-						println  ' nombre ' + componentAppNameCurrent
+						println  ' nombre ' + componentAppNameCurrent*/
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: componentAppName,
-								componentTag: componentTag,
+								//componentTag: componentTag,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',
@@ -60,7 +59,7 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
-								fileIncludePatterns: componentTagCurrent+'.'+componentTagCurrent,
+								fileIncludePatterns: componentAppName+'.ear',
 								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',

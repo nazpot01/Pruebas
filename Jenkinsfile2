@@ -34,7 +34,7 @@ pipeline {
 				//zip zipFile: "ear.zip", dir: "${workspace}/archivos", glob: "**/*"
 				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+" | ', returnStdout : true ).split('\n');
 				println lista.toString() + 'aqui estoy -----'
-				for(int i = 0; i < a; i++){
+				for(int i = 0; i < lista.size(); i++){
 					println lista[i]
 				}
 				a = lista.size()

@@ -66,7 +66,8 @@ pipeline {
 							println 'Execion' + e.getMessage()
 						}
 					sh"cd /var/lib/jenkins/workspace/unicoprueba/archivos && rm -r ${componentAppNameCurrent}'.'${componentTagCurrent}"
-					println dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
+					dir = new File("/var/lib/jenkins/workspace/unicoprueba/archivos")
+					println dir
 				}
 				
 				

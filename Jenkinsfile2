@@ -34,7 +34,7 @@ pipeline {
 				dir.eachFile{
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
-					artefact = sh(returnStdout: true, script: "(ls -p dir | grep ${componentAppNameCurrent}) || true")
+					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
 					//zip "ear.zip", dir: "/var/lib/jenkins/workspace/unicoprueba/archivos"
 					println artefact
 					try {

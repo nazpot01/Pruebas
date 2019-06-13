@@ -32,7 +32,7 @@ pipeline {
 				lista = sh(returnStdout: true, script: "(ls -p ${dir} | grep .ear) || true").split('\n');
 				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+" | ', returnStdout : true ).split('\n');
 				a = lista.size()
-				println a
+				println a 
 				componentTag = new String[a]
 				componentAppName = new String[a]
 				

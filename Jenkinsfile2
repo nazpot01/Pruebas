@@ -1,4 +1,3 @@
-//--- EL ULTIMO QUE HA QUEDADO MEJOR
 #!groovy
 import groovy.io.FileType
 def componentName

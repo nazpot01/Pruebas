@@ -72,7 +72,6 @@ pipeline {
 							println e.printStackTrace();
 							println 'Execion' + e.getMessage()
 						}
-					}
 					sh"rm -R ${dir}"
 				}
 				

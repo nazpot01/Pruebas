@@ -1,10 +1,11 @@
+//--- EL ULTIMO QUE HA QUEDADO MEJOR
 #!groovy
 import groovy.io.FileType
 def componentName
 def componentTag
 def lista
 def componentAppName
-def archivos = 'archivos'
+
 
 
 pipeline {
@@ -35,7 +36,7 @@ pipeline {
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p ${dir} | grep ${componentAppNameCurrent}) || true")
-					//zip "ear.zip", dir: "/var/lib/jenkins/workspace/unicoprueba/archivos"
+					//zip zipFile: "ear.zip", dir: "${workspace}/${dir}"
 					println artefact
 					try {
 						
@@ -43,8 +44,8 @@ pipeline {
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: artefact,
-								//componentTag: componentTagCurrent,
+							    componentName: componentAppNameCurrent,
+								componentTag: componentTagCurrent,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',
@@ -54,7 +55,7 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
-								fileIncludePatterns: '*.ear',
+								fileIncludePatterns: '*.'+componentTagCurrent,
 								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',
@@ -77,3 +78,6 @@ pipeline {
 		
 	}
 }
+
+
+

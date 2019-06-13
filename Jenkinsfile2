@@ -35,7 +35,7 @@ pipeline {
 					componentAppNameCurrent = it.getName().toString().substring(0,it.getName().toString().length()-4)
 					componentTagCurrent=  it.getName().toString().substring(it.getName().toString().length()-3,it.getName().toString().length()) 
 					artefact = sh(returnStdout: true, script: "(ls -p dir | grep ${componentAppNameCurrent}) || true")
-					zip "ear.zip", dir: "${workspace}/${archivos}"
+					//zip "ear.zip", dir: "/var/lib/jenkins/workspace/unicoprueba/archivos"
 					println artefact
 					try {
 						
@@ -43,7 +43,7 @@ pipeline {
 							siteName: 'Connect_Jenkins_Ucd',
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-							    componentName: componentAppNameCurrent,
+							    componentName: artefact,
 								//componentTag: componentTagCurrent,
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
@@ -54,7 +54,7 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
-								fileIncludePatterns: '*.zip',
+								fileIncludePatterns: '*.ear',
 								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',

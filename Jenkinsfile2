@@ -62,7 +62,7 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba',
-								fileIncludePatterns: componentAppNameCurrent'.'componentTagCurrent,
+								fileIncludePatterns: componentAppNameCurrent+'.'+componentTagCurrent,
 								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',

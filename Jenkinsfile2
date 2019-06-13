@@ -47,9 +47,6 @@ pipeline {
 					for(int i = 0; i < componentAppName.size(); i++) {
 						componentTagCurrent = componentTag[i]
 					        componentAppNameCurrent = componentAppName[i]
-												
-						println componentTagCurrent + 'nuevo'
-						println componentAppNameCurrent
 						try {
 						   step([$class: 'UCDeployPublisher',
 							siteName: 'Connect_Jenkins_Ucd',
@@ -66,8 +63,9 @@ pipeline {
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 								pushVersion: "${BUILD_NUMBER}",
 								baseDir: '/var/lib/jenkins/workspace/unicoprueba/archivos',
-								fileIncludePatterns: componentAppNameCurrent+'.'+componentTagCurrent,
-								fileExcludePatterns: "*.zip",
+								fileIncludePatterns: '.ear',
+								    //componentAppNameCurrent+'.'+componentTagCurrent
+								fileExcludePatterns: '',
 								pushProperties: '',
 								pushDescription: 'Pushed from Jenkins',
 								pushIncremental: false

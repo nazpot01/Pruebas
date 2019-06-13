@@ -33,7 +33,7 @@ pipeline {
 				lista = sh(returnStdout: true, script: "(ls ${dir} | grep .ear) || true").split('\n');
 				//zip zipFile: "ear.zip", dir: "${workspace}/archivos", glob: "**/*"
 				//lista=sh(script: 'git diff --name-only origin/master  | grep -Ex ".*\\.[a-z]+" | ', returnStdout : true ).split('\n');
-				println lista + 'aqui estoy -----'
+				println lista.toString() + 'aqui estoy -----'
 				for(int i = 0; i < a; i++){
 					println lista[i]
 				}

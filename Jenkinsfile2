@@ -44,7 +44,7 @@ pipeline {
 							component: [
 							    $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
 							    componentName: componentAppNameCurrent,
-								componentTag: componentTagCurrent,
+								componentTag: 'EAR',
 							    createComponent: [
 								$class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 								componentTemplate: '',
